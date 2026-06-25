@@ -1,231 +1,175 @@
-# Reglas de Diseño de Vercel
+# Directrices de Interfaz Web
 
-Directrices oficiales para construir interfaces web accesibles, de alto rendimiento y con la estética de Vercel.
+Revisa estos archivos para verificar su cumplimiento: $ARGUMENTS
 
-> Fuente: [vercel-labs/web-interface-guidelines](https://github.com/vercel-labs/web-interface-guidelines)
+Lee los archivos y contrasta con las reglas a continuación. El resultado debe ser conciso pero completo — sacrifica gramática por brevedad. Alta señal, bajo ruido.
 
----
+## Reglas
 
-## Accesibilidad
+### Accesibilidad
 
-- Botones con solo ícono: requieren `aria-label`
-- Controles de formulario: deben tener `<label>` o `aria-label`
-- Elementos interactivos: deben incluir manejadores de teclado (`onKeyDown` / `onKeyUp`)
-- Usar `<button>` para acciones y `<a>` / `<Link>` para navegación — nunca `<div onClick>`
-- Imágenes: deben tener texto alternativo `alt` (o `alt=""` si son decorativas)
-- Íconos decorativos: añadir `aria-hidden="true"`
-- Actualizaciones asíncronas (toasts, validaciones): usar `aria-live="polite"`
-- Preferir HTML semántico sobre ARIA cuando sea posible
-- Encabezados jerárquicos `<h1>` – `<h6>` con enlace de salto al contenido principal
-- Los anclajes de encabezado necesitan `scroll-margin-top`
+- Los botones con solo ícono necesitan `aria-label`
+- Los controles de formulario necesitan `<label>` o `aria-label`
+- Los elementos interactivos necesitan manejadores de teclado (`onKeyDown` / `onKeyUp`)
+- Usar `<button>` para acciones, `<a>` / `<Link>` para navegación (nunca `<div onClick>`)
+- Las imágenes necesitan `alt` (o `alt=""` si son decorativas)
+- Los íconos decorativos necesitan `aria-hidden="true"`
+- Las actualizaciones asíncronas (toasts, validaciones) necesitan `aria-live="polite"`
+- Usar HTML semántico (`<button>`, `<a>`, `<label>`, `<table>`) antes de ARIA
+- Encabezados jerárquicos `<h1>` – `<h6>`; incluir enlace de salto al contenido principal
+- `scroll-margin-top` en los anclajes de encabezado
 
----
+### Estados de Foco
 
-## Estados de Foco
+- Los elementos interactivos necesitan foco visible: `focus-visible:ring-*` o equivalente
+- Nunca usar `outline-none` / `outline: none` sin un reemplazo de foco
+- Usar `:focus-visible` sobre `:focus` (evitar anillo de foco al hacer clic)
+- Agrupar foco con `:focus-within` para controles compuestos
 
-- El foco visible es obligatorio: usar `focus-visible:ring-*` o equivalente
-- Nunca eliminar los contornos sin ofrecer un reemplazo visual
-- Usar `:focus-visible` en lugar de `:focus`
-- Controles compuestos: agrupar con `:focus-within`
+### Formularios
 
----
-
-## Formularios
-
-- Los campos de entrada necesitan `autocomplete` y un atributo `name` significativo
-- Usar los atributos `type` correctos (`email`, `tel`, `url`, `number`) e `inputmode`
-- No bloquear el pegado de texto con `onPaste` + `preventDefault`
-- Etiquetas clicables mediante `htmlFor` o envolviendo el control
-- Desactivar el corrector ortográfico en emails, códigos y nombres de usuario: `spellCheck={false}`
-- Checkboxes y radios: un solo objetivo de clic, sin zonas muertas
-- El botón de envío permanece activo hasta que comienza la solicitud; mostrar spinner durante la petición
+- Los inputs necesitan `autocomplete` y un `name` significativo
+- Usar el `type` correcto (`email`, `tel`, `url`, `number`) e `inputmode`
+- Nunca bloquear el pegado (`onPaste` + `preventDefault`)
+- Etiquetas clicables (`htmlFor` o envolviendo el control)
+- Desactivar spellcheck en emails, códigos y nombres de usuario (`spellCheck={false}`)
+- Checkboxes/radios: la etiqueta y el control comparten un único objetivo de clic (sin zonas muertas)
+- El botón de envío permanece activo hasta que comienza la solicitud; spinner durante la petición
 - Errores en línea junto a los campos; enfocar el primer error al enviar
-- El texto de marcador (`placeholder`) termina con `…` mostrando un patrón de ejemplo
-- Campos que no sean de autenticación: `autocomplete="off"` para evitar interferencia del gestor de contraseñas
-- Advertir antes de navegar si hay cambios sin guardar
+- Los placeholders terminan con `…` y muestran un patrón de ejemplo
+- `autocomplete="off"` en campos que no sean de autenticación para evitar activación del gestor de contraseñas
+- Advertir antes de navegar con cambios sin guardar (evento `beforeunload` o guardia del router)
 
----
+### Animación
 
-## Animación
-
-- Respetar `prefers-reduced-motion`
-- Animar únicamente `transform` / `opacity`
-- Evitar `transition: all` — listar las propiedades explícitamente
+- Respetar `prefers-reduced-motion` (proporcionar variante reducida o desactivar)
+- Animar solo `transform` / `opacity` (propiedades compatibles con el compositor)
+- Nunca usar `transition: all` — listar las propiedades explícitamente
 - Establecer el `transform-origin` correcto
-- SVG: transformaciones en `<g>` con `transform-box: fill-box; transform-origin: center`
-- Las animaciones deben poder interrumpirse
-
----
-
-## Tipografía
-
-- Puntos suspensivos: usar `…` no `...`
-- Comillas tipográficas `"` `"` en lugar de comillas rectas `"`
-- Espacios de no separación: `10&nbsp;MB`, `⌘&nbsp;K`, nombres de marcas
-- Estados de carga: `"Cargando…"`, `"Guardando…"`
-- Columnas numéricas: `font-variant-numeric: tabular-nums`
-- Encabezados: `text-wrap: balance` o `text-pretty`
-
----
-
-## Manejo de Contenido
-
-- Contenido largo: usar `truncate`, `line-clamp-*` o `break-words`
-- Hijos de flex: usar `min-w-0` para truncar texto correctamente
-- Gestionar los estados vacíos — nunca dejar una pantalla en blanco sin contexto
-- Anticipar entradas de usuario cortas, promedio y muy largas
-
----
-
-## Imágenes
-
-- `width` y `height` explícitos en cada imagen (evita CLS — Cumulative Layout Shift)
-- Imágenes fuera del viewport inicial: `loading="lazy"`
-- Imágenes críticas sobre el pliegue: `priority` o `fetchpriority="high"`
-
----
-
-## Rendimiento
-
-- Listas largas (>50 elementos): se requiere virtualización
-- No leer el layout del DOM durante el render
-- Agrupar operaciones del DOM en lote
-- Preferir inputs no controlados cuando sea posible
-- Usar `<link rel="preconnect">` para CDNs y dominios de terceros
-- Fuentes críticas: `<link rel="preload">` con `font-display: swap`
-
----
-
-## Navegación y Estado
-
-- La URL debe reflejar el estado (filtros, pestañas, paginación, paneles)
-- Los enlaces deben usar `<a>` / `<Link>` para conservar el comportamiento nativo del navegador
-- UI con estado: vincular mediante parámetros de consulta (`query params`)
-- Acciones destructivas: mostrar modal de confirmación o ventana de deshacer
-
----
-
-## Toque e Interacción
-
-- Usar `touch-action: manipulation`
-- Configurar `-webkit-tap-highlight-color` de forma intencional
-- Modales y cajones laterales: `overscroll-behavior: contain`
-- Durante el arrastre: desactivar la selección de texto, usar `inert`
-- `autoFocus` con moderación — solo en escritorio
-
----
-
-## Áreas Seguras y Layout
-
-- Diseños de borde a borde: usar `env(safe-area-inset-*)`
-- Prevenir barras de desplazamiento no deseadas
-- Preferir flexbox/grid sobre medición con JavaScript
-
----
-
-## Modo Oscuro y Temas
-
-- Aplicar `color-scheme: dark` en `<html>`
-- `<meta name="theme-color">` debe coincidir con el color de fondo
-- Elementos `<select>` nativos: especificar `background-color` y `color` explícitamente
-
----
-
-## Localización (i18n)
-
-- Fechas y horas: usar `Intl.DateTimeFormat`
-- Números y divisas: usar `Intl.NumberFormat`
-- Detección de idioma mediante `Accept-Language` / `navigator.languages`
-- Nombres de marcas e identificadores: `translate="no"`
-
----
-
-## Seguridad en Hidratación (SSR)
-
-- Los inputs con `value` necesitan `onChange` (o usar `defaultValue`)
-- Proteger el renderizado de fechas/horas contra desajustes de hidratación
-- Minimizar el uso de `suppressHydrationWarning`
-
----
-
-## Estados Hover e Interactivos
-
-- Botones y enlaces deben tener estados `hover:`
-- Los estados interactivos deben aumentar el contraste visual
-
----
-
-## Redacción y Contenido (Copywriting)
-
-- Preferir voz activa
-- Title Case para encabezados y botones
-- Numerales para conteos
-- Etiquetas de botones específicas y orientadas a la acción
-- Los mensajes de error deben incluir la solución, no solo el problema
-- Perspectiva en segunda persona
-- Usar `&` en lugar de "y" cuando el espacio sea limitado
-- Usar lenguaje positivo por defecto, incluso en mensajes de error
-
----
-
-## Anti-patrones — Siempre Evitar
-
-| Anti-patrón | Motivo |
-|---|---|
-| `user-scalable=no` o `maximum-scale=1` | Impide el zoom de accesibilidad |
-| `onPaste` + `preventDefault` | Bloquea flujos legítimos del usuario |
-| `transition: all` | Causa animaciones involuntarias y pérdida de rendimiento |
-| `outline-none` sin reemplazo | Elimina el foco visible |
-| `onClick` en navegación sin `<a>` | Rompe comportamiento nativo del navegador |
-| `<div>` / `<span>` con manejadores de clic | Rompe accesibilidad por teclado |
-| Imágenes sin dimensiones | Provoca cambios de layout (CLS) |
-| Arrays grandes sin virtualización | Degrada el rendimiento |
-| Inputs de formulario sin etiqueta | Inaccesible para lectores de pantalla |
-| Botones de ícono sin `aria-label` | Inaccesible |
-| Formatos de fecha/número codificados de forma fija | Rompe la localización |
-| `autoFocus` sin justificación | Interrumpe el flujo del usuario |
-
----
-
-## Sistema de Diseño Geist — Tokens Visuales
-
-### Colores
-
-| Token | Valor | Uso |
-|---|---|---|
-| Primary | `#171717` | Texto principal, botones primarios |
-| Secondary | `#4d4d4d` | Texto secundario |
-| Tertiary | `#006bff` | Énfasis, enfoque, éxito |
-| Neutral | `#f2f2f2` | Fondos de superficie |
-| Background | `#ffffff` / `#fafafa` | Fondos de página |
-| Border | `#ebebeb` | Bordes de tarjetas, inputs |
-| Error | Rojo | Errores y estados destructivos |
-| Warning | Ámbar | Advertencias |
-| Success | Verde | Confirmaciones |
+- SVG: transformaciones en el contenedor `<g>` con `transform-box: fill-box; transform-origin: center`
+- Las animaciones deben ser interrumpibles — responder a la entrada del usuario durante la animación
 
 ### Tipografía
 
-| Elemento | Fuente | Observación |
-|---|---|---|
-| Cuerpo de texto | Geist Sans | Geométrica, cálida, legible |
-| Bloques de código | Geist Mono | Para todos los encabezados de código |
-| Tamaño de encabezado | Display | Espacio entre letras negativo (–2.4 px a –2.88 px) |
+- Usar `…` no `...`
+- Comillas tipográficas `"` `"` en lugar de comillas rectas `"`
+- Espacios de no separación: `10&nbsp;MB`, `⌘&nbsp;K`, nombres de marcas
+- Los estados de carga terminan con `…`: `"Cargando…"`, `"Guardando…"`
+- `font-variant-numeric: tabular-nums` para columnas/comparaciones numéricas
+- Usar `text-wrap: balance` o `text-pretty` en encabezados (evita líneas cortas huérfanas)
 
-### Espaciado
+### Manejo de Contenido
 
-- Sistema basado en múltiplos de **4 px**
-- Relleno interno estándar: **24 px**
-- Separación entre secciones: **32 px**
+- Los contenedores de texto deben manejar contenido largo: `truncate`, `line-clamp-*` o `break-words`
+- Los hijos de flex necesitan `min-w-0` para permitir el truncado de texto
+- Gestionar estados vacíos — no renderizar UI rota para strings/arrays vacíos
+- Contenido generado por el usuario: anticipar entradas cortas, promedio y muy largas
 
-### Elevación y Sombras
+### Imágenes
 
-- Filosofía **border-first**: los elementos estáticos se definen con un borde de 1 px (`#ebebeb`)
-- `box-shadow` reservada para estados interactivos (hover) y elementos sobre el plano principal (popovers, modales)
+- `<img>` necesita `width` y `height` explícitos (evita CLS)
+- Imágenes fuera del viewport inicial: `loading="lazy"`
+- Imágenes críticas sobre el pliegue: `priority` o `fetchpriority="high"`
 
-### Bordes
+### Rendimiento
 
-- Radio estándar: **6 px** — aplicado a tarjetas, inputs y botones
+- Listas grandes (>50 elementos): virtualizar (`virtua`, `content-visibility: auto`)
+- Sin lecturas de layout en el render (`getBoundingClientRect`, `offsetHeight`, `offsetWidth`, `scrollTop`)
+- Agrupar lecturas/escrituras del DOM; evitar intercalarlas
+- Preferir inputs no controlados; los inputs controlados deben ser baratos por cada pulsación de tecla
+- Agregar `<link rel="preconnect">` para dominios de CDN y assets
+- Fuentes críticas: `<link rel="preload" as="font">` con `font-display: swap`
 
----
+### Navegación y Estado
 
-*Estas reglas deben consultarse antes de iniciar cualquier trabajo de UI en proyectos que utilicen el sistema de diseño de Vercel.*
+- La URL refleja el estado — filtros, pestañas, paginación, paneles expandidos en query params
+- Los enlaces usan `<a>` / `<Link>` (soporte para Cmd/Ctrl+clic, clic con botón central)
+- Vincular profundamente toda la UI con estado (si usa `useState`, considerar sincronización con URL mediante `nuqs` u similar)
+- Las acciones destructivas necesitan modal de confirmación o ventana de deshacer — nunca inmediatas
+
+### Toque e Interacción
+
+- `touch-action: manipulation` (evita el retraso por zoom con doble toque)
+- `-webkit-tap-highlight-color` configurado de forma intencional
+- `overscroll-behavior: contain` en modales, cajones y hojas laterales
+- Durante el arrastre: desactivar la selección de texto, usar `inert` en los elementos arrastrados
+- `autoFocus` con moderación — solo en escritorio, en un único input primario; evitar en móvil
+
+### Áreas Seguras y Layout
+
+- Los layouts de borde a borde necesitan `env(safe-area-inset-*)` para muescas
+- Evitar barras de desplazamiento no deseadas: `overflow-x-hidden` en contenedores, corregir desbordamiento de contenido
+- Flexbox/grid sobre medición con JavaScript para el layout
+
+### Modo Oscuro y Temas
+
+- `color-scheme: dark` en `<html>` para temas oscuros (corrige barra de desplazamiento e inputs)
+- `<meta name="theme-color">` debe coincidir con el fondo de la página
+- `<select>` nativo: `background-color` y `color` explícitos (modo oscuro en Windows)
+
+### Localización (i18n)
+
+- Fechas/horas: usar `Intl.DateTimeFormat` — no formatos codificados de forma fija
+- Números/divisas: usar `Intl.NumberFormat` — no formatos codificados de forma fija
+- Detectar idioma mediante `Accept-Language` / `navigator.languages`, no por IP
+- Nombres de marcas, tokens de código, identificadores: envolver con `translate="no"` para evitar traducción automática incorrecta
+
+### Seguridad en Hidratación
+
+- Los inputs con `value` necesitan `onChange` (o usar `defaultValue` para no controlados)
+- Renderizado de fechas/horas: proteger contra desajuste de hidratación (servidor vs cliente)
+- `suppressHydrationWarning` solo donde sea verdaderamente necesario
+
+### Estados Hover e Interactivos
+
+- Los botones y enlaces necesitan estado `hover:` (retroalimentación visual)
+- Los estados interactivos aumentan el contraste: hover/active/focus más prominentes que el estado normal
+
+### Redacción y Contenido (Copywriting)
+
+- Voz activa: "Instala el CLI" no "El CLI será instalado"
+- Title Case para encabezados y botones (estilo Chicago)
+- Numerales para conteos: "8 despliegues" no "ocho"
+- Etiquetas de botón específicas: "Guardar API Key" no "Continuar"
+- Los mensajes de error incluyen la solución o el siguiente paso, no solo el problema
+- Segunda persona; evitar la primera persona
+- `&` en lugar de "y" donde el espacio sea limitado
+
+### Anti-patrones (señalar siempre)
+
+- `user-scalable=no` o `maximum-scale=1` desactivando el zoom
+- `onPaste` con `preventDefault`
+- `transition: all`
+- `outline-none` sin reemplazo de `focus-visible`
+- `onClick` inline en navegación sin `<a>`
+- `<div>` o `<span>` con manejadores de clic (deben ser `<button>`)
+- Imágenes sin dimensiones
+- Arrays grandes con `.map()` sin virtualización
+- Inputs de formulario sin etiquetas
+- Botones de ícono sin `aria-label`
+- Formatos de fecha/número codificados de forma fija (usar `Intl.*`)
+- `autoFocus` sin justificación clara
+
+## Formato de Salida
+
+Agrupar por archivo. Usar formato `archivo:línea` (clicable en VS Code). Hallazgos concisos.
+
+```text
+## src/Button.tsx
+
+src/Button.tsx:42 - botón de ícono sin aria-label
+src/Button.tsx:18 - input sin label
+src/Button.tsx:55 - animación sin prefers-reduced-motion
+src/Button.tsx:67 - transition: all → listar propiedades
+
+## src/Modal.tsx
+
+src/Modal.tsx:12 - falta overscroll-behavior: contain
+src/Modal.tsx:34 - "..." → "…"
+
+## src/Card.tsx
+
+✓ correcto
+```
+
+Indicar el problema y su ubicación. Omitir explicación a menos que la solución no sea obvia. Sin preámbulos.
