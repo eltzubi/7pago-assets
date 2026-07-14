@@ -24,12 +24,12 @@ No hay `package.json`, ni framework, ni proceso de build: cada archivo
 | `REGLAS-DISENO-VERCEL.md` | Checklist de accesibilidad/rendimiento/UX (sistema Geist de Vercel, traducido) usado como rúbrica de auditoría para cualquier snippet HTML de este repo. |
 | `berri.html` | Bloque mínimo con los `<link>` de Google Fonts (Syne, DM Sans) para una página de noticias ("berri" = noticia en euskera). |
 
-Otras ramas pueden añadir snippets de página adicionales (por ejemplo una
-rama con `pagina-inicio.html`, el bloque completo de la portada: hero,
-vídeo de YouTube embebido, tarjetas de información, galería de fotos y
-panel de cierre). Antes de asumir que un archivo existe, revisa la rama en
-la que estás trabajando — este repo crece por snippet/página, no todo vive
-siempre en la rama por defecto.
+Otras ramas pueden añadir snippets de página adicionales. Ejemplo real: la
+rama `claude/7pago-website-review-vtim2z` (PR #1) añade `pagina-inicio.html`,
+el bloque completo de la portada — hero, vídeo de YouTube embebido, tarjetas
+de información, galería de fotos y panel de cierre. Antes de asumir que un
+archivo existe, revisa la rama en la que estás trabajando — este repo crece
+por snippet/página, no todo vive siempre en la rama por defecto.
 
 ## Convenciones de los snippets
 
