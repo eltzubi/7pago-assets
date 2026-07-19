@@ -55,7 +55,8 @@
     text-decoration: none;
     border-radius: 4px;
     margin-bottom: 12px;
-    outline: none;
+    outline: 2px solid var(--bg-nagusia);
+    outline-offset: 2px;
 }
 
 /* Focus visible global */
@@ -116,6 +117,7 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     background: rgba(0, 242, 254, 0.05);
+    touch-action: manipulation;
 }
 .p7-hizkuntza-botoia:hover {
     background: var(--neon-ziana);
@@ -211,6 +213,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    touch-action: manipulation;
 }
 .p7-botoi-panela:hover {
     background: var(--testu-argia);
@@ -347,6 +350,7 @@
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
+    touch-action: manipulation;
 }
 .p7-botoi-ertzduna:hover { border-color: var(--neon-morea); background: var(--neon-morea); box-shadow: 0 0 15px var(--neon-morea); }
 
@@ -367,9 +371,11 @@
 
     <a href="#p7-eduki-nagusia" class="p7-salto-lotura">Eduki nagusira joan</a>
 
-    <div class="p7-goiko-barra">
+    <nav class="p7-goiko-barra" aria-label="Hizkuntza aldaketa">
         <a href="/es/inicio" class="p7-hizkuntza-botoia">ES</a>
-    </div>
+    </nav>
+
+    <main>
 
     <header class="p7-hasiera" id="p7-eduki-nagusia">
         <h1 class="p7-izenburu-distiratsua" translate="no">7PAGO</h1>
@@ -383,8 +389,7 @@
             <iframe
                 src="https://www.youtube.com/embed/UXGQBb10PW0?rel=0"
                 title="7pago Mendi Lasterketa bideoa"
-                allowfullscreen
-                loading="lazy">
+                allowfullscreen>
             </iframe>
         </div>
     </header>
@@ -449,7 +454,7 @@
         <div class="p7-ziber-txartela" style="--ertz-argia: rgba(157, 78, 223, 0.35)">
             <div>
                 <div class="p7-txartel-goiburua">02 // ZIRKUITU OFIZIALA</div>
-                <h2 class="p7-txartel-izenburua">Durangaldeko <span>Kopa</span></h2>
+                <h2 class="p7-txartel-izenburua" translate="no">Durangaldeko <span>Kopa</span></h2>
                 <div class="p7-txartel-edukia">
                     <p>Eskualdeko 8 lasterketa biltzen dituen zirkuituko lehen geltokia gara. Zirkuituko lasterketa guztiak puntuagarriak dira. Aurtengo nobedadea bi kopa izango ditugula da: DURANGALDEKO MARI KOPA (lasterketa luzeak) eta DURANGALDEKO SUGAAR KOPA (lasterketa motzak).</p>
                 </div>
@@ -510,6 +515,8 @@
         <div class="p7-hurrengo-ikurna">IV. EDIZIOA · 2027</div>
     </div>
 
+    </main>
+
 </div>
 
 <button id="p7-gora-botoia" aria-label="Gora joan">
@@ -521,8 +528,8 @@
 <style>
 #p7-gora-botoia {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: calc(30px + env(safe-area-inset-bottom));
+    right: calc(30px + env(safe-area-inset-right));
     width: 50px;
     height: 50px;
     border-radius: 14px;
@@ -538,6 +545,7 @@
     justify-content: center;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     z-index: 9999;
+    touch-action: manipulation;
     transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease;
 }
 #p7-gora-botoia:hover {
