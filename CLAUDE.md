@@ -89,6 +89,7 @@ Cuando el usuario pida cambios o mejoras a un snippet de 7pago:
 - Rama por defecto actual: `claude/vercel-design-rules-hlp77q`. No hay `main`/`master`.
 - Cada tarea (nuevo snippet, revisión de accesibilidad, nueva documentación) se desarrolla en su propia rama `claude/<descripción-corta>-<hash>` y se abre como PR independiente — no se apila trabajo no relacionado en la misma rama.
 - Antes de empezar, comprueba con `git remote show origin` cuál es la rama HEAD real, ya que puede cambiar entre tareas.
+- Cada PR sigue la plantilla [`.github/pull_request_template.md`](./.github/pull_request_template.md): qué snippet es, qué cambia, si se auditó contra `REGLAS-DISENO-VERCEL.md` y capturas antes/después.
 
 ## Comandos útiles
 
