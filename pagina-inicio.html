@@ -1,0 +1,599 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://primary.jwwb.nl">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<style>
+#p7-etorkizuna-basa {
+    --bg-nagusia: #020617;
+    --bg-txartela: rgba(15, 23, 42, 0.65);
+    --ertz-argia: rgba(0, 242, 254, 0.25);
+    --neon-ziana: #00f2fe;
+    --neon-morea: #9d4edf;
+    --neon-berdea: #00f5d4;
+    --neon-gorria: #ff2a2a;
+    --testu-argia: #f8fafc;
+    --testu-itzalia: #94a3b8;
+
+    color-scheme: dark;
+    background-color: var(--bg-nagusia);
+    color: var(--testu-argia);
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 20px 10px;
+    border-radius: 24px;
+    overflow: hidden;
+    background-image:
+        radial-gradient(circle at 80% 10%, rgba(157, 78, 223, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 20% 60%, rgba(0, 242, 254, 0.15) 0%, transparent 50%);
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+}
+
+#p7-etorkizuna-basa *, #p7-etorkizuna-basa *::before, #p7-etorkizuna-basa *::after {
+    box-sizing: border-box;
+}
+
+/* Skip link */
+.p7-salto-lotura {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.p7-salto-lotura:focus-visible {
+    position: static;
+    width: auto;
+    height: auto;
+    display: block;
+    padding: 8px 16px;
+    background: var(--neon-ziana);
+    color: var(--bg-nagusia);
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    outline: 2px solid var(--bg-nagusia);
+    outline-offset: 2px;
+}
+
+/* Focus visible global */
+.p7-hizkuntza-botoia:focus-visible,
+.p7-botoi-panela:focus-visible,
+.p7-botoi-ertzduna:focus-visible,
+.p7-kopa-lotura:focus-visible,
+#p7-gora-botoia:focus-visible {
+    outline: 2px solid var(--neon-ziana);
+    outline-offset: 3px;
+}
+
+/* Transiciones solo en elementos interactivos */
+.p7-hizkuntza-botoia,
+.p7-botoi-panela,
+.p7-botoi-ertzduna,
+.p7-galeria-nagusia img,
+.p7-galeria-argazkitxoa img,
+#p7-gora-botoia {
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* Respetar prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .p7-hizkuntza-botoia,
+    .p7-botoi-panela,
+    .p7-botoi-ertzduna,
+    .p7-galeria-nagusia img,
+    .p7-galeria-argazkitxoa img,
+    #p7-gora-botoia {
+        transition: none;
+    }
+    .p7-galeria-nagusia:hover img,
+    .p7-galeria-argazkitxoa:hover img {
+        transform: none;
+        filter: none;
+    }
+    .p7-botoi-panela:hover,
+    #p7-gora-botoia:hover {
+        transform: none;
+    }
+}
+
+.p7-goiko-barra {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+.p7-hizkuntza-botoia {
+    color: var(--neon-ziana);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 6px 16px;
+    border: 1px solid var(--neon-ziana);
+    border-radius: 4px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(0, 242, 254, 0.05);
+    touch-action: manipulation;
+}
+.p7-hizkuntza-botoia:hover {
+    background: var(--neon-ziana);
+    color: var(--bg-nagusia);
+    box-shadow: 0 0 15px var(--neon-ziana);
+}
+
+.p7-hasiera {
+    text-align: center;
+    padding: 20px 10px;
+}
+.p7-izenburu-distiratsua {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(45px, 9vw, 110px) !important;
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    text-wrap: balance;
+    background: linear-gradient(180deg, #ffffff 30%, var(--testu-itzalia) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 10px 0;
+}
+.p7-azpiizenburua {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(18px, 3.5vw, 32px) !important;
+    color: var(--neon-ziana);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+}
+
+.p7-bideo-euskarria {
+    max-width: 900px;
+    width: 100%;
+    margin: 30px auto;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 242, 254, 0.15);
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    aspect-ratio: 16/9;
+}
+.p7-bideo-euskarria iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.p7-hasierako-azalpena {
+    max-width: 650px;
+    margin: 20px auto;
+    font-size: 17px;
+    color: var(--testu-itzalia);
+    line-height: 1.6;
+}
+
+.p7-ekintza-gunea {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    background: rgba(15, 23, 42, 0.8);
+    border-top: 3px solid var(--neon-gorria);
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 -4px 20px rgba(255, 42, 42, 0.12), 0 10px 30px rgba(0,0,0,0.5);
+}
+.p7-gune-izenburua {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    text-wrap: balance;
+    margin-bottom: 15px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.p7-gune-loturak {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.p7-botoi-panela {
+    text-decoration: none;
+    color: var(--testu-argia);
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 2px solid var(--neon-gorria);
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    touch-action: manipulation;
+}
+.p7-botoi-panela:hover {
+    background: var(--testu-argia);
+    color: var(--bg-nagusia);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    border-color: var(--testu-argia);
+    transform: translateY(-2px);
+}
+
+.p7-sare-orokorra {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 10px;
+}
+
+@media (min-width: 900px) {
+    .p7-sare-orokorra { grid-template-columns: repeat(2, 1fr); }
+    .p7-tarte-bikoitza { grid-column: span 2; }
+}
+
+.p7-ziber-txartela {
+    background: var(--bg-txartela);
+    border: 1px solid var(--ertz-argia);
+    border-radius: 16px;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.p7-txartel-goiburua {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--neon-morea);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+.p7-txartel-izenburua {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px !important;
+    text-wrap: balance;
+    margin: 0 0 15px 0;
+    color: #fff;
+}
+.p7-txartel-izenburua span { color: var(--neon-ziana); }
+.p7-txartel-edukia {
+    color: var(--testu-itzalia);
+    line-height: 1.6;
+    font-size: 14px;
+}
+.p7-txartel-edukia p { margin-bottom: 12px; }
+.p7-txartel-edukia p:last-child { margin-bottom: 0; }
+
+.p7-informazio-lerroa {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 15px;
+}
+@media(min-width: 600px) {
+    .p7-informazio-lerroa { grid-template-columns: auto 1fr; align-items: center; text-align: left; }
+}
+
+.p7-elkarte-logoa img { max-width: 100px; filter: brightness(0) invert(1); }
+.p7-kopa-irudia { max-width: 140px; }
+
+.p7-daturik-onena {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+}
+.p7-datu-kutxa {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 15px 5px;
+    text-align: center;
+}
+.p7-datu-korrikalariak { grid-column: span 2; }
+.p7-datu-kutxa.nabarmendua {
+    background: linear-gradient(135deg, rgba(157, 78, 223, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+    border-color: var(--ertz-argia);
+}
+
+@media(min-width: 768px) {
+    .p7-daturik-onena { grid-template-columns: repeat(5, 1fr); }
+    .p7-datu-korrikalariak { grid-column: span 1; }
+}
+
+.p7-datu-zenbakia {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px !important;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: #fff;
+    margin-bottom: 4px;
+}
+.p7-datu-kutxa.nabarmendua .p7-datu-zenbakia { color: var(--neon-ziana); text-shadow: 0 0 10px rgba(0, 242, 254, 0.4); }
+.p7-datu-testua { font-size: 10px; text-transform: uppercase; color: var(--testu-itzalia); }
+
+.p7-galeria-atala {
+    background: #090d16;
+    border: 1px solid rgba(255,255,255,0.03);
+    border-radius: 16px;
+    padding: 35px 20px;
+}
+.p7-galeria-egitura {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 25px;
+}
+@media (min-width: 750px) { .p7-galeria-egitura { grid-template-columns: 1.4fr 1fr; } }
+.p7-galeria-nagusia { border-radius: 12px; overflow: hidden; min-height: 260px; border: 1px solid rgba(255,255,255,0.05); }
+.p7-galeria-azpisarea { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+.p7-galeria-argazkitxoa { border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; border: 1px solid rgba(255,255,255,0.05); }
+.p7-galeria-nagusia img, .p7-galeria-argazkitxoa img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.p7-galeria-nagusia:hover img, .p7-galeria-argazkitxoa:hover img { transform: scale(1.05); filter: brightness(1.1); }
+
+.p7-galeria-botoia { text-align: center; margin-top: 30px; }
+.p7-botoi-ertzduna {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--testu-argia);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    touch-action: manipulation;
+}
+.p7-botoi-ertzduna:hover { border-color: var(--neon-morea); background: var(--neon-morea); box-shadow: 0 0 15px var(--neon-morea); }
+
+.p7-bukaerako-panela {
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 45px 20px;
+    text-align: center;
+    margin-top: 25px;
+}
+.p7-bukaerako-panela h2 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 48px) !important; text-wrap: balance; margin-bottom: 15px; color: #fff; }
+.p7-bukaerako-panela p { color: var(--testu-itzalia); max-width: 550px; margin: 0 auto 30px auto; font-size: 16px; }
+.p7-hurrengo-ikurna { display: inline-block; border: 2px dashed var(--neon-ziana); color: var(--neon-ziana); padding: 10px 25px; border-radius: 4px; font-weight: 700; letter-spacing: 2px; }
+</style>
+
+<div id="p7-etorkizuna-basa">
+
+    <a href="#p7-eduki-nagusia" class="p7-salto-lotura">Eduki nagusira joan</a>
+
+    <nav class="p7-goiko-barra" aria-label="Hizkuntza aldaketa">
+        <a href="/es/inicio" class="p7-hizkuntza-botoia">ES</a>
+    </nav>
+
+    <main>
+
+    <header class="p7-hasiera" id="p7-eduki-nagusia">
+        <h1 class="p7-izenburu-distiratsua" translate="no">7PAGO</h1>
+        <div class="p7-azpiizenburua">Mendi Lasterketa</div>
+
+        <p class="p7-hasierako-azalpena">
+            Mallabia · Bizkaia | Oiz mendiaren magalean, ezkutuko ur-jauzi, baso eta bide historikoen artean.
+        </p>
+
+        <div class="p7-bideo-euskarria">
+            <iframe
+                src="https://www.youtube.com/embed/UXGQBb10PW0?rel=0"
+                title="7pago Mendi Lasterketa bideoa"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </header>
+
+    <section class="p7-ekintza-gunea">
+        <h2 class="p7-gune-izenburua">III. Edizioa (2026) amaitu da. Bilatu zure datuak!</h2>
+        <div class="p7-gune-loturak">
+            <a href="/emaitzak" class="p7-botoi-panela"><span aria-hidden="true">🏁</span> Sailkapenak</a>
+            <a href="/argazkiak" class="p7-botoi-panela"><span aria-hidden="true">📸</span> Argazki Galeria</a>
+            <a href="/bideoak" class="p7-botoi-panela"><span aria-hidden="true">🎬</span> Bideoak</a>
+        </div>
+    </section>
+
+    <div style="padding: 0 10px 20px 10px;">
+        <div class="p7-daturik-onena">
+            <div class="p7-datu-kutxa nabarmendua p7-datu-korrikalariak">
+                <div class="p7-datu-zenbakia">400</div>
+                <div class="p7-datu-testua">Parte-hartzaile</div>
+            </div>
+            <div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(0, 242, 254, 0.15);">
+                <div class="p7-datu-zenbakia">25K</div>
+                <div class="p7-datu-testua">Ibilbide Luzea</div>
+            </div>
+            <div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(0, 242, 254, 0.15);">
+                <div class="p7-datu-zenbakia">+1400m</div>
+                <div class="p7-datu-testua">Desnibela</div>
+            </div>
+            <div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(157, 78, 223, 0.15);">
+                <div class="p7-datu-zenbakia">16K</div>
+                <div class="p7-datu-testua">Ibilbide Laburra</div>
+            </div>
+            <div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(157, 78, 223, 0.15);">
+                <div class="p7-datu-zenbakia">+750m</div>
+                <div class="p7-datu-testua">Desnibela</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="p7-sare-orokorra">
+
+        <div class="p7-ziber-txartela">
+            <div>
+                <div class="p7-txartel-goiburua">01 // ANTOLAKUNTZA</div>
+                <h2 class="p7-txartel-izenburua"><span translate="no">7 Pago</span> Elkartea</h2>
+                <div class="p7-txartel-edukia">
+                    <p>Mallabiako mendiekiko maitasunetik jaio ginen. Duatloiak antolatzetik mendi lasterketa hau diseinatzera igaro gara, Oiz lekuko dela ur-jauziak, baso zaharrak eta bide tekniko ezezagunak erakusteko.</p>
+                </div>
+            </div>
+            <div class="p7-informazio-lerroa">
+                <div class="p7-elkarte-logoa">
+                    <img
+                        src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/7pago-logo-original-transparente-high-x078sj.png"
+                        alt="7 Pago"
+                        width="100"
+                        height="100"
+                        loading="lazy">
+                </div>
+                <div class="p7-txartel-edukia"><p style="font-size: 12px;">Mallabian mendi kirola eta inguruko parajeak bultzatzeko lanean diharduen taldea.</p></div>
+            </div>
+        </div>
+
+        <div class="p7-ziber-txartela" style="--ertz-argia: rgba(157, 78, 223, 0.35)">
+            <div>
+                <div class="p7-txartel-goiburua">02 // ZIRKUITU OFIZIALA</div>
+                <h2 class="p7-txartel-izenburua" translate="no">Durangaldeko <span>Kopa</span></h2>
+                <div class="p7-txartel-edukia">
+                    <p>Eskualdeko 8 lasterketa biltzen dituen zirkuituko lehen geltokia gara. Zirkuituko lasterketa guztiak puntuagarriak dira. Aurtengo nobedadea bi kopa izango ditugula da: DURANGALDEKO MARI KOPA (lasterketa luzeak) eta DURANGALDEKO SUGAAR KOPA (lasterketa motzak).</p>
+                </div>
+            </div>
+            <div class="p7-informazio-lerroa">
+                <a href="https://durangaldekokopa.com/" target="_blank" rel="noopener noreferrer">
+                    <img
+                        class="p7-kopa-irudia"
+                        src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo_horizontal-high-73hlhn.png?enable-io=true&width=1252"
+                        alt="Durangaldeko Kopa"
+                        width="140"
+                        height="60"
+                        loading="lazy">
+                </a>
+                <a class="p7-kopa-lotura" href="https://durangaldekokopa.com/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--neon-ziana); text-decoration: none; font-weight: bold;">Ikusi Kopako sailkapenak →</a>
+            </div>
+        </div>
+
+        <div class="p7-tarte-bikoitza p7-galeria-atala">
+            <div style="text-align: center;">
+                <div class="p7-txartel-goiburua">2026KO EDIZIOA</div>
+                <h2 class="p7-txartel-izenburua" style="margin-bottom: 0;">Une <span>Garrantzitsuenak</span></h2>
+            </div>
+            <div class="p7-galeria-egitura">
+                <div class="p7-galeria-nagusia">
+                    <img
+                        src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/7z1a2837-high.jpg"
+                        alt="Arietzu"
+                        width="800"
+                        height="600"
+                        loading="lazy">
+                </div>
+                <div class="p7-galeria-azpisarea">
+                    <div class="p7-galeria-argazkitxoa">
+                        <img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/img_6642-heic-high.jpg" alt="Zengotitagaine" width="400" height="300" loading="lazy">
+                    </div>
+                    <div class="p7-galeria-argazkitxoa">
+                        <img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_9047-high.jpg" alt="Lasterketa" width="400" height="300" loading="lazy">
+                    </div>
+                    <div class="p7-galeria-argazkitxoa">
+                        <img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_9862-high.jpg" alt="Herria" width="400" height="300" loading="lazy">
+                    </div>
+                    <div class="p7-galeria-argazkitxoa">
+                        <img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_0763-high.jpg" alt="Sariak" width="400" height="300" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="p7-galeria-botoia">
+                <a href="/argazkiak" class="p7-botoi-ertzduna">Ikusi Album Osoa →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p7-bukaerako-panela">
+        <h2>Eskerrik asko Mallabia!</h2>
+        <p>Gure ingurunean 400 korrikolari elkarrekin ikustea bikaina izan da. Hirugarren edizioa historia da jada. Jarraitu gaitazu sareetan izen-emateen irekiera ez galtzeko.</p>
+        <div class="p7-hurrengo-ikurna">IV. EDIZIOA · 2027</div>
+    </div>
+
+    </main>
+
+</div>
+
+<button id="p7-gora-botoia" aria-label="Gora joan">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+</button>
+
+<style>
+#p7-gora-botoia {
+    position: fixed;
+    bottom: calc(30px + env(safe-area-inset-bottom));
+    right: calc(30px + env(safe-area-inset-right));
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.6);
+    color: var(--neon-ziana, #00f2fe);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    z-index: 9999;
+    touch-action: manipulation;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease;
+}
+#p7-gora-botoia:hover {
+    background: var(--neon-ziana, #00f2fe);
+    color: #020617;
+    border-color: var(--neon-ziana, #00f2fe);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+    transform: translateY(-2px);
+}
+#p7-gora-botoia:focus-visible {
+    outline: 2px solid var(--neon-ziana, #00f2fe);
+    outline-offset: 3px;
+}
+#p7-gora-botoia:active { transform: translateY(1px); }
+#p7-gora-botoia.ikusgai {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+#p7-gora-botoia svg { transition: transform 0.3s ease; }
+#p7-gora-botoia:hover svg { transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+    #p7-gora-botoia,
+    #p7-gora-botoia svg {
+        transition: none;
+    }
+    #p7-gora-botoia:hover,
+    #p7-gora-botoia:hover svg {
+        transform: none;
+    }
+}
+</style>
+
+<script>
+(function () {
+    var botoia = document.getElementById('p7-gora-botoia');
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 400) {
+            botoia.classList.add('ikusgai');
+        } else {
+            botoia.classList.remove('ikusgai');
+        }
+    });
+
+    botoia.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}());
+</script>
