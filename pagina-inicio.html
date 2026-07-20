@@ -4,59 +4,71 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
 <style>
+/* Pintado del wrapper de Webador + full-bleed lateral */
+div:has(> #p7-etorkizuna-basa),
+div:has(#p7-etorkizuna-basa) {
+background: #020617 !important;
+}
 #p7-etorkizuna-basa {
-    --bg-nagusia: #020617;
-    --bg-txartela: rgba(15, 23, 42, 0.65);
-    --ertz-argia: rgba(0, 242, 254, 0.25);
-    --neon-ziana: #00f2fe;
-    --neon-morea: #9d4edf;
-    --neon-berdea: #00f5d4;
-    --neon-gorria: #ff2a2a;
-    --testu-argia: #f8fafc;
-    --testu-itzalia: #94a3b8;
+width: 100vw !important;
+max-width: 100vw !important;
+margin-left: calc(50% - 50vw) !important;
+margin-right: 0 !important;
+}
 
-    color-scheme: dark;
-    background-color: var(--bg-nagusia);
-    color: var(--testu-argia);
-    font-family: 'Space Grotesk', sans-serif;
-    padding: 20px 10px;
-    border-radius: 24px;
-    overflow: hidden;
-    background-image:
-        radial-gradient(circle at 80% 10%, rgba(157, 78, 223, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 20% 60%, rgba(0, 242, 254, 0.15) 0%, transparent 50%);
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
+#p7-etorkizuna-basa {
+--bg-nagusia: #020617;
+--bg-txartela: rgba(15, 23, 42, 0.65);
+--ertz-argia: rgba(0, 242, 254, 0.25);
+--neon-ziana: #00f2fe;
+--neon-morea: #9d4edf;
+--neon-berdea: #00f5d4;
+--neon-gorria: #ff2a2a;
+--testu-argia: #f8fafc;
+--testu-itzalia: #94a3b8;
+
+color-scheme: dark;
+background-color: var(--bg-nagusia);
+color: var(--testu-argia);
+font-family: 'Space Grotesk', sans-serif;
+padding: 20px 10px;
+border-radius: 24px;
+overflow: hidden;
+background-image:
+radial-gradient(circle at 80% 10%, rgba(157, 78, 223, 0.15) 0%, transparent 50%),
+radial-gradient(circle at 20% 60%, rgba(0, 242, 254, 0.15) 0%, transparent 50%);
+box-sizing: border-box;
+width: 100%;
+max-width: 100%;
 }
 
 #p7-etorkizuna-basa *, #p7-etorkizuna-basa *::before, #p7-etorkizuna-basa *::after {
-    box-sizing: border-box;
+box-sizing: border-box;
 }
 
 /* Skip link */
 .p7-salto-lotura {
-    position: absolute;
-    left: -9999px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
+position: absolute;
+left: -9999px;
+top: auto;
+width: 1px;
+height: 1px;
+overflow: hidden;
 }
 .p7-salto-lotura:focus-visible {
-    position: static;
-    width: auto;
-    height: auto;
-    display: block;
-    padding: 8px 16px;
-    background: var(--neon-ziana);
-    color: var(--bg-nagusia);
-    font-weight: 700;
-    text-decoration: none;
-    border-radius: 4px;
-    margin-bottom: 12px;
-    outline: 2px solid var(--bg-nagusia);
-    outline-offset: 2px;
+position: static;
+width: auto;
+height: auto;
+display: block;
+padding: 8px 16px;
+background: var(--neon-ziana);
+color: var(--bg-nagusia);
+font-weight: 700;
+text-decoration: none;
+border-radius: 4px;
+margin-bottom: 12px;
+outline: 2px solid var(--bg-nagusia);
+outline-offset: 2px;
 }
 
 /* Focus visible global */
@@ -64,9 +76,11 @@
 .p7-botoi-panela:focus-visible,
 .p7-botoi-ertzduna:focus-visible,
 .p7-kopa-lotura:focus-visible,
+.p7-2027-input:focus-visible,
+.p7-2027-btn:focus-visible,
 #p7-gora-botoia:focus-visible {
-    outline: 2px solid var(--neon-ziana);
-    outline-offset: 3px;
+outline: 2px solid var(--neon-ziana);
+outline-offset: 3px;
 }
 
 /* Transiciones solo en elementos interactivos */
@@ -76,263 +90,381 @@
 .p7-galeria-nagusia img,
 .p7-galeria-argazkitxoa img,
 #p7-gora-botoia {
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease;
+transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease;
 }
 
 /* Respetar prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
-    .p7-hizkuntza-botoia,
-    .p7-botoi-panela,
-    .p7-botoi-ertzduna,
-    .p7-galeria-nagusia img,
-    .p7-galeria-argazkitxoa img,
-    #p7-gora-botoia {
-        transition: none;
-    }
-    .p7-galeria-nagusia:hover img,
-    .p7-galeria-argazkitxoa:hover img {
-        transform: none;
-        filter: none;
-    }
-    .p7-botoi-panela:hover,
-    #p7-gora-botoia:hover {
-        transform: none;
-    }
+.p7-hizkuntza-botoia,
+.p7-botoi-panela,
+.p7-botoi-ertzduna,
+.p7-galeria-nagusia img,
+.p7-galeria-argazkitxoa img,
+#p7-gora-botoia {
+transition: none;
+}
+.p7-galeria-nagusia:hover img,
+.p7-galeria-argazkitxoa:hover img {
+transform: none;
+filter: none;
+}
+.p7-botoi-panela:hover,
+#p7-gora-botoia:hover {
+transform: none;
+}
+/* Ken Burns desactivado */
+.p7-hasiera::before {
+animation: none !important;
+transform: scale(1) !important;
+}
+}
+
+/* =============================================
+CORRECCIÓN 1: Ken Burns en pseudo-elemento ::before
+Evita repaint de background-size, compatible iOS Safari
+============================================= */
+@keyframes p7KenBurns {
+from { transform: scale(1); }
+to { transform: scale(1.06); }
 }
 
 .p7-goiko-barra {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    padding: 0 10px;
+position: absolute;
+top: 14px;
+right: 14px;
+z-index: 2;
+margin: 0;
+padding: 0;
 }
 .p7-hizkuntza-botoia {
-    color: var(--neon-ziana);
-    text-decoration: none;
-    font-weight: 700;
-    padding: 6px 16px;
-    border: 1px solid var(--neon-ziana);
-    border-radius: 4px;
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    background: rgba(0, 242, 254, 0.05);
-    touch-action: manipulation;
+color: var(--neon-ziana);
+text-decoration: none;
+font-weight: 700;
+padding: 4px 10px;
+border: 1px solid var(--neon-ziana);
+border-radius: 4px;
+background: rgba(2, 6, 23, 0.55);
+font-size: 10px;
+letter-spacing: 1px;
+text-transform: uppercase;
+touch-action: manipulation;
 }
 .p7-hizkuntza-botoia:hover {
-    background: var(--neon-ziana);
-    color: var(--bg-nagusia);
-    box-shadow: 0 0 15px var(--neon-ziana);
+background: var(--neon-ziana);
+color: var(--bg-nagusia);
+box-shadow: 0 0 15px var(--neon-ziana);
 }
 
+/* =============================================
+Header con imagen en ::before + Ken Burns vía transform
+============================================= */
 .p7-hasiera {
-    text-align: center;
-    padding: 20px 10px;
+text-align: center;
+padding: 60px 10px 40px;
+position: relative;
+border-radius: 24px;
+margin-bottom: 25px;
+overflow: hidden; /* contiene el ::before escalado */
+isolation: isolate;
+scroll-margin-top: 90px;
 }
+
+/* Capa imagen: transform no provoca layout reflow */
+.p7-hasiera::before {
+content: '';
+position: absolute;
+inset: -5%; /* margen para que scale(1.06) no deje bordes blancos */
+z-index: -2;
+background-image: url('https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/7z1a2837-high.jpg');
+background-size: cover;
+background-position: center 30%;
+animation: p7KenBurns 25s ease-in-out infinite alternate;
+will-change: transform;
+filter: brightness(0.88) saturate(1.15);
+}
+
+/* Capa gradiente: más foto visible, brillo frío desde abajo */
+.p7-hasiera::after {
+content: '';
+position: absolute;
+inset: 0;
+z-index: -1;
+background:
+radial-gradient(ellipse at 50% 100%, rgba(0,210,240,0.10) 0%, transparent 65%),
+linear-gradient(180deg, rgba(2,6,23,.72) 0%, rgba(2,6,23,.35) 45%, rgba(2,6,23,.88) 100%);
+}
+
 .p7-izenburu-distiratsua {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(45px, 9vw, 110px) !important;
-    font-weight: 800;
-    line-height: 0.9;
-    letter-spacing: -2px;
-    text-wrap: balance;
-    background: linear-gradient(180deg, #ffffff 30%, var(--testu-itzalia) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin: 0 0 10px 0;
+font-family: 'Syne', sans-serif;
+font-size: clamp(45px, 9vw, 110px) !important;
+font-weight: 800;
+line-height: 0.9;
+letter-spacing: -2px;
+text-wrap: balance;
+background: linear-gradient(180deg, #ffffff 30%, var(--testu-itzalia) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+margin: 0 0 10px 0;
 }
 .p7-azpiizenburua {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(18px, 3.5vw, 32px) !important;
-    color: var(--neon-ziana);
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    margin-bottom: 25px;
+font-family: 'Syne', sans-serif;
+font-size: clamp(18px, 3.5vw, 32px) !important;
+color: var(--neon-ziana);
+text-transform: uppercase;
+letter-spacing: 4px;
+margin-bottom: 25px;
 }
 
+/* =============================================
+CORRECCIÓN 2: YouTube facade
+Carga el iframe solo al hacer clic — evita ~500KB en el render inicial
+============================================= */
 .p7-bideo-euskarria {
-    max-width: 900px;
-    width: 100%;
-    margin: 30px auto;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 242, 254, 0.15);
-    border: 1px solid rgba(0, 242, 254, 0.2);
-    aspect-ratio: 16/9;
+max-width: 900px;
+width: 100%;
+margin: 30px auto;
+border-radius: 18px;
+overflow: hidden;
+box-shadow: 0 10px 40px rgba(0, 242, 254, 0.15);
+border: 1px solid rgba(0, 242, 254, 0.2);
+aspect-ratio: 16/9;
+position: relative;
+background: #000;
+cursor: pointer;
 }
+
+.p7-bideo-aurreikuspena {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+}
+
+.p7-bideo-erreproduzitu {
+position: absolute;
+inset: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+background: rgba(0,0,0,0.3);
+transition: background 0.3s ease;
+}
+.p7-bideo-erreproduzitu:hover {
+background: rgba(0,0,0,0.1);
+}
+
+.p7-bideo-erreproduzitu svg {
+width: 72px;
+height: 72px;
+filter: drop-shadow(0 0 12px rgba(0,242,254,0.5));
+transition: transform 0.3s ease;
+}
+.p7-bideo-erreproduzitu:hover svg {
+transform: scale(1.1);
+}
+
+/* iframe oculto hasta clic */
 .p7-bideo-euskarria iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+border: none;
+opacity: 0;
+pointer-events: none;
+}
+.p7-bideo-euskarria.aktibo iframe {
+opacity: 1;
+pointer-events: auto;
+}
+.p7-bideo-euskarria.aktibo .p7-bideo-erreproduzitu,
+.p7-bideo-euskarria.aktibo .p7-bideo-aurreikuspena {
+display: none;
 }
 
 .p7-hasierako-azalpena {
-    max-width: 650px;
-    margin: 20px auto;
-    font-size: 17px;
-    color: var(--testu-itzalia);
-    line-height: 1.6;
+max-width: 650px;
+margin: 20px auto;
+font-size: 17px;
+color: var(--testu-itzalia);
+line-height: 1.6;
 }
 
 .p7-ekintza-gunea {
-    max-width: 900px;
-    margin: 0 auto 40px auto;
-    background: rgba(15, 23, 42, 0.8);
-    border-top: 3px solid var(--neon-gorria);
-    padding: 25px;
-    border-radius: 16px;
-    text-align: center;
-    box-shadow: 0 -4px 20px rgba(255, 42, 42, 0.12), 0 10px 30px rgba(0,0,0,0.5);
+max-width: 900px;
+margin: 0 auto 40px auto;
+background: rgba(15, 23, 42, 0.8);
+border-top: 3px solid var(--neon-ziana);
+padding: 25px;
+border-radius: 16px;
+text-align: center;
+box-shadow: 0 -4px 20px rgba(0, 242, 254, 0.18), 0 10px 30px rgba(0,0,0,0.5);
 }
-.p7-gune-izenburua {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    text-wrap: balance;
-    margin-bottom: 15px;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+
+/* =============================================
+CORRECCIÓN 3: Jerarquía de headings
+El h2 dentro del header genera confusión semántica.
+Convertido a p con rol visual equivalente.
+============================================= */
+.p7-ekintza-izenburua {
+font-family: 'Syne', sans-serif;
+font-size: 20px;
+text-wrap: balance;
+margin-bottom: 15px;
+color: #fff;
+text-transform: uppercase;
+letter-spacing: 1px;
 }
 .p7-gune-loturak {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
+display: flex;
+gap: 15px;
+justify-content: center;
+flex-wrap: wrap;
 }
 
 .p7-botoi-panela {
-    text-decoration: none;
-    color: var(--testu-argia);
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-top: 2px solid var(--neon-gorria);
-    padding: 14px 28px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 15px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    touch-action: manipulation;
+text-decoration: none;
+color: var(--testu-argia);
+background: rgba(15, 23, 42, 0.6);
+border: 1px solid rgba(255, 255, 255, 0.1);
+border-top: 2px solid var(--neon-ziana);
+padding: 14px 28px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 15px;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+touch-action: manipulation;
 }
 .p7-botoi-panela:hover {
-    background: var(--testu-argia);
-    color: var(--bg-nagusia);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    border-color: var(--testu-argia);
-    transform: translateY(-2px);
+background: var(--testu-argia);
+color: var(--bg-nagusia);
+box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+border-color: var(--testu-argia);
+transform: translateY(-2px);
 }
 
 .p7-sare-orokorra {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 10px;
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1fr;
+gap: 30px;
+padding: 10px;
 }
 
 @media (min-width: 900px) {
-    .p7-sare-orokorra { grid-template-columns: repeat(2, 1fr); }
-    .p7-tarte-bikoitza { grid-column: span 2; }
+.p7-sare-orokorra { grid-template-columns: repeat(2, 1fr); }
+.p7-tarte-bikoitza { grid-column: span 2; }
 }
 
 .p7-ziber-txartela {
-    background: var(--bg-txartela);
-    border: 1px solid var(--ertz-argia);
-    border-radius: 16px;
-    padding: 30px 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+background: var(--bg-txartela);
+border: 1px solid var(--ertz-argia);
+border-radius: 16px;
+padding: 30px 25px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
 }
 
 .p7-txartel-goiburua {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--neon-morea);
-    margin-bottom: 8px;
-    font-weight: 700;
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 2px;
+color: var(--neon-morea);
+margin-bottom: 8px;
+font-weight: 700;
 }
 .p7-txartel-izenburua {
-    font-family: 'Syne', sans-serif;
-    font-size: 28px !important;
-    text-wrap: balance;
-    margin: 0 0 15px 0;
-    color: #fff;
+font-family: 'Syne', sans-serif;
+font-size: 28px !important;
+text-wrap: balance;
+margin: 0 0 15px 0;
+color: #fff;
 }
 .p7-txartel-izenburua span { color: var(--neon-ziana); }
 .p7-txartel-edukia {
-    color: var(--testu-itzalia);
-    line-height: 1.6;
-    font-size: 14px;
+color: var(--testu-itzalia);
+line-height: 1.6;
+font-size: 14px;
 }
 .p7-txartel-edukia p { margin-bottom: 12px; }
 .p7-txartel-edukia p:last-child { margin-bottom: 0; }
 
 .p7-informazio-lerroa {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    margin-top: 15px;
+display: grid;
+grid-template-columns: 1fr;
+gap: 20px;
+margin-top: 15px;
 }
 @media(min-width: 600px) {
-    .p7-informazio-lerroa { grid-template-columns: auto 1fr; align-items: center; text-align: left; }
+.p7-informazio-lerroa { grid-template-columns: auto 1fr; align-items: center; text-align: left; }
 }
 
 .p7-elkarte-logoa img { max-width: 100px; filter: brightness(0) invert(1); }
 .p7-kopa-irudia { max-width: 140px; }
 
 .p7-daturik-onena {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    width: 100%;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 12px;
+width: 100%;
 }
 .p7-datu-kutxa {
-    background: rgba(15, 23, 42, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 15px 5px;
-    text-align: center;
+background: rgba(15, 23, 42, 0.8);
+border: 1px solid rgba(255, 255, 255, 0.05);
+border-radius: 12px;
+padding: 15px 5px;
+text-align: center;
 }
 .p7-datu-korrikalariak { grid-column: span 2; }
 .p7-datu-kutxa.nabarmendua {
-    background: linear-gradient(135deg, rgba(157, 78, 223, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
-    border-color: var(--ertz-argia);
+background: linear-gradient(135deg, rgba(157, 78, 223, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+border-color: var(--ertz-argia);
 }
 
 @media(min-width: 768px) {
-    .p7-daturik-onena { grid-template-columns: repeat(5, 1fr); }
-    .p7-datu-korrikalariak { grid-column: span 1; }
+.p7-daturik-onena { grid-template-columns: repeat(5, 1fr); }
+.p7-datu-korrikalariak { grid-column: span 1; }
 }
 
 .p7-datu-zenbakia {
-    font-family: 'Syne', sans-serif;
-    font-size: 24px !important;
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
-    color: #fff;
-    margin-bottom: 4px;
+font-family: 'Syne', sans-serif;
+font-size: 24px !important;
+font-weight: 800;
+font-variant-numeric: tabular-nums;
+color: #fff;
+margin-bottom: 4px;
 }
 .p7-datu-kutxa.nabarmendua .p7-datu-zenbakia { color: var(--neon-ziana); text-shadow: 0 0 10px rgba(0, 242, 254, 0.4); }
 .p7-datu-testua { font-size: 10px; text-transform: uppercase; color: var(--testu-itzalia); }
 
 .p7-galeria-atala {
-    background: #090d16;
-    border: 1px solid rgba(255,255,255,0.03);
-    border-radius: 16px;
-    padding: 35px 20px;
+background: #090d16;
+border: 1px solid rgba(255,255,255,0.03);
+border-radius: 16px;
+padding: 35px 20px;
 }
 .p7-galeria-egitura {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-    margin-top: 25px;
+display: grid;
+grid-template-columns: 1fr;
+gap: 15px;
+margin-top: 25px;
 }
 @media (min-width: 750px) { .p7-galeria-egitura { grid-template-columns: 1.4fr 1fr; } }
-.p7-galeria-nagusia { border-radius: 12px; overflow: hidden; min-height: 260px; border: 1px solid rgba(255,255,255,0.05); }
+.p7-galeria-nagusia {
+border-radius: 12px;
+overflow: hidden;
+min-height: 360px;
+border: 1px solid rgba(255,255,255,0.05);
+}
+@media (min-width: 750px) {
+.p7-galeria-nagusia { min-height: 460px; }
+}
 .p7-galeria-azpisarea { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
 .p7-galeria-argazkitxoa { border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; border: 1px solid rgba(255,255,255,0.05); }
 .p7-galeria-nagusia img, .p7-galeria-argazkitxoa img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -340,260 +472,719 @@
 
 .p7-galeria-botoia { text-align: center; margin-top: 30px; }
 .p7-botoi-ertzduna {
-    display: inline-block;
-    text-decoration: none;
-    color: var(--testu-argia);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    touch-action: manipulation;
+display: inline-block;
+text-decoration: none;
+color: var(--testu-argia);
+border: 1px solid rgba(255,255,255,0.2);
+padding: 12px 30px;
+border-radius: 50px;
+font-size: 12px;
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+touch-action: manipulation;
 }
 .p7-botoi-ertzduna:hover { border-color: var(--neon-morea); background: var(--neon-morea); box-shadow: 0 0 15px var(--neon-morea); }
 
 .p7-bukaerako-panela {
-    background: #000000;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 45px 20px;
-    text-align: center;
-    margin-top: 25px;
+background: #000000;
+border: 1px solid rgba(255, 255, 255, 0.05);
+border-radius: 16px;
+padding: 45px 20px;
+text-align: center;
+margin-top: 25px;
 }
 .p7-bukaerako-panela h2 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 48px) !important; text-wrap: balance; margin-bottom: 15px; color: #fff; }
 .p7-bukaerako-panela p { color: var(--testu-itzalia); max-width: 550px; margin: 0 auto 30px auto; font-size: 16px; }
-.p7-hurrengo-ikurna { display: inline-block; border: 2px dashed var(--neon-ziana); color: var(--neon-ziana); padding: 10px 25px; border-radius: 4px; font-weight: 700; letter-spacing: 2px; }
-</style>
 
-<div id="p7-etorkizuna-basa">
+/* =============================================
+Tarjeta 2027 — captura de email (Web3Forms)
+Mismo sello morado que la galería
+============================================= */
+.p7-2027-txartela {
+max-width: 560px;
+margin: 0 auto;
+background: linear-gradient(180deg, rgba(15,23,42,0.85) 0%, rgba(2,6,23,0.9) 100%);
+border: 1px solid rgba(157, 78, 223, 0.45);
+border-radius: 16px;
+padding: 28px 24px 24px;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+.p7-2027-txartela::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 2px;
+background: linear-gradient(90deg, var(--neon-morea) 0%, var(--neon-ziana) 100%);
+}
+.p7-2027-txartela > * {
+position: relative;
+z-index: 1;
+}
+.p7-2027-tag {
+font-family: 'Syne', sans-serif;
+font-size: 12px !important;
+font-weight: 800;
+letter-spacing: .18em;
+text-transform: uppercase;
+color: var(--neon-morea);
+margin: 0 0 8px;
+display: block;
+}
+.p7-2027-desc {
+font-size: 14px !important;
+color: var(--testu-itzalia);
+line-height: 1.6;
+margin: 0 auto 18px !important;
+max-width: 440px;
+}
+.p7-2027-form {
+display: flex;
+gap: 10px;
+max-width: 440px;
+margin: 0 auto;
+justify-content: center;
+}
+.p7-2027-input {
+flex: 1;
+min-width: 0;
+background: rgba(2, 6, 23, 0.7);
+border: 1px solid rgba(157, 78, 223, 0.35);
+border-radius: 8px;
+padding: 13px 16px;
+font-family: 'Space Grotesk', sans-serif;
+font-size: 14px !important;
+color: var(--testu-argia);
+outline: none;
+transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.p7-2027-input::placeholder {
+color: rgba(148, 163, 184, 0.6);
+}
+.p7-2027-input:focus {
+border-color: var(--neon-ziana);
+box-shadow: 0 0 14px rgba(0, 242, 254, 0.25);
+}
+.p7-2027-btn {
+background: var(--neon-morea);
+color: #fff;
+border: 1px solid var(--neon-morea);
+border-radius: 8px;
+padding: 13px 24px;
+font-family: 'Space Grotesk', sans-serif;
+font-size: 12px !important;
+font-weight: 700;
+letter-spacing: .1em;
+text-transform: uppercase;
+cursor: pointer;
+transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+white-space: nowrap;
+touch-action: manipulation;
+}
+.p7-2027-btn:hover {
+background: #b06af0;
+box-shadow: 0 0 20px rgba(157, 78, 223, 0.6);
+transform: translateY(-1px);
+}
+.p7-2027-btn:disabled {
+opacity: 0.55;
+cursor: wait;
+transform: none;
+box-shadow: none;
+}
+.p7-2027-msg {
+font-size: 12px !important;
+font-weight: 600;
+letter-spacing: .04em;
+margin: 12px 0 0;
+min-height: 16px;
+display: block;
+}
+.p7-2027-msg.ok { color: var(--neon-berdea); }
+.p7-2027-msg.err { color: var(--neon-gorria); }
 
-    <a href="#p7-eduki-nagusia" class="p7-salto-lotura">Eduki nagusira joan</a>
+@media (max-width: 640px) {
+.p7-2027-form {
+flex-direction: column;
+}
+.p7-2027-btn {
+width: 100%;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.p7-2027-input,
+.p7-2027-btn {
+transition: none;
+}
+.p7-2027-btn:hover {
+transform: none;
+}
+}
 
-    <nav class="p7-goiko-barra" aria-label="Hizkuntza aldaketa">
-        <a href="/es/inicio" class="p7-hizkuntza-botoia">ES</a>
-    </nav>
-
-    <main>
-
-    <header class="p7-hasiera" id="p7-eduki-nagusia">
-        <h1 class="p7-izenburu-distiratsua" translate="no">7PAGO</h1>
-        <div class="p7-azpiizenburua">Mendi Lasterketa</div>
-
-        <p class="p7-hasierako-azalpena">
-            Mallabia · Bizkaia | Oiz mendiaren magalean, ezkutuko ur-jauzi, baso eta bide historikoen artean.
-        </p>
-
-        <div class="p7-bideo-euskarria">
-            <iframe
-                src="https://www.youtube.com/embed/UXGQBb10PW0?rel=0"
-                title="7pago Mendi Lasterketa bideoa"
-                allowfullscreen>
-            </iframe>
-        </div>
-    </header>
-
-    <section class="p7-ekintza-gunea">
-        <h2 class="p7-gune-izenburua">III. Edizioa (2026) amaitu da. Bilatu zure datuak!</h2>
-        <div class="p7-gune-loturak">
-            <a href="/emaitzak" class="p7-botoi-panela"><span aria-hidden="true">🏁</span> Sailkapenak</a>
-            <a href="/argazkiak" class="p7-botoi-panela"><span aria-hidden="true">📸</span> Argazki Galeria</a>
-            <a href="/bideoak" class="p7-botoi-panela"><span aria-hidden="true">🎬</span> Bideoak</a>
-        </div>
-    </section>
-
-    <div style="padding: 0 10px 20px 10px;">
-        <div class="p7-daturik-onena">
-            <div class="p7-datu-kutxa nabarmendua p7-datu-korrikalariak">
-                <div class="p7-datu-zenbakia">400</div>
-                <div class="p7-datu-testua">Parte-hartzaile</div>
-            </div>
-            <div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(0, 242, 254, 0.15);">
-                <div class="p7-datu-zenbakia">25K</div>
-                <div class="p7-datu-testua">Ibilbide Luzea</div>
-            </div>
-            <div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(0, 242, 254, 0.15);">
-                <div class="p7-datu-zenbakia">+1400m</div>
-                <div class="p7-datu-testua">Desnibela</div>
-            </div>
-            <div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(157, 78, 223, 0.15);">
-                <div class="p7-datu-zenbakia">16K</div>
-                <div class="p7-datu-testua">Ibilbide Laburra</div>
-            </div>
-            <div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(157, 78, 223, 0.15);">
-                <div class="p7-datu-zenbakia">+750m</div>
-                <div class="p7-datu-testua">Desnibela</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="p7-sare-orokorra">
-
-        <div class="p7-ziber-txartela">
-            <div>
-                <div class="p7-txartel-goiburua">01 // ANTOLAKUNTZA</div>
-                <h2 class="p7-txartel-izenburua"><span translate="no">7 Pago</span> Elkartea</h2>
-                <div class="p7-txartel-edukia">
-                    <p>Mallabiako mendiekiko maitasunetik jaio ginen. Duatloiak antolatzetik mendi lasterketa hau diseinatzera igaro gara, Oiz lekuko dela ur-jauziak, baso zaharrak eta bide tekniko ezezagunak erakusteko.</p>
-                </div>
-            </div>
-            <div class="p7-informazio-lerroa">
-                <div class="p7-elkarte-logoa">
-                    <img
-                        src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/7pago-logo-original-transparente-high-x078sj.png"
-                        alt="7 Pago"
-                        width="100"
-                        height="100"
-                        loading="lazy">
-                </div>
-                <div class="p7-txartel-edukia"><p style="font-size: 12px;">Mallabian mendi kirola eta inguruko parajeak bultzatzeko lanean diharduen taldea.</p></div>
-            </div>
-        </div>
-
-        <div class="p7-ziber-txartela" style="--ertz-argia: rgba(157, 78, 223, 0.35)">
-            <div>
-                <div class="p7-txartel-goiburua">02 // ZIRKUITU OFIZIALA</div>
-                <h2 class="p7-txartel-izenburua" translate="no">Durangaldeko <span>Kopa</span></h2>
-                <div class="p7-txartel-edukia">
-                    <p>Eskualdeko 8 lasterketa biltzen dituen zirkuituko lehen geltokia gara. Zirkuituko lasterketa guztiak puntuagarriak dira. Aurtengo nobedadea bi kopa izango ditugula da: DURANGALDEKO MARI KOPA (lasterketa luzeak) eta DURANGALDEKO SUGAAR KOPA (lasterketa motzak).</p>
-                </div>
-            </div>
-            <div class="p7-informazio-lerroa">
-                <a href="https://durangaldekokopa.com/" target="_blank" rel="noopener noreferrer">
-                    <img
-                        class="p7-kopa-irudia"
-                        src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo_horizontal-high-73hlhn.png?enable-io=true&width=1252"
-                        alt="Durangaldeko Kopa"
-                        width="140"
-                        height="60"
-                        loading="lazy">
-                </a>
-                <a class="p7-kopa-lotura" href="https://durangaldekokopa.com/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--neon-ziana); text-decoration: none; font-weight: bold;">Ikusi Kopako sailkapenak →</a>
-            </div>
-        </div>
-
-        <div class="p7-tarte-bikoitza p7-galeria-atala">
-            <div style="text-align: center;">
-                <div class="p7-txartel-goiburua">2026KO EDIZIOA</div>
-                <h2 class="p7-txartel-izenburua" style="margin-bottom: 0;">Une <span>Garrantzitsuenak</span></h2>
-            </div>
-            <div class="p7-galeria-egitura">
-                <div class="p7-galeria-nagusia">
-                    <img
-                        src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/7z1a2837-high.jpg"
-                        alt="Arietzu"
-                        width="800"
-                        height="600"
-                        loading="lazy">
-                </div>
-                <div class="p7-galeria-azpisarea">
-                    <div class="p7-galeria-argazkitxoa">
-                        <img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/img_6642-heic-high.jpg" alt="Zengotitagaine" width="400" height="300" loading="lazy">
-                    </div>
-                    <div class="p7-galeria-argazkitxoa">
-                        <img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_9047-high.jpg" alt="Lasterketa" width="400" height="300" loading="lazy">
-                    </div>
-                    <div class="p7-galeria-argazkitxoa">
-                        <img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_9862-high.jpg" alt="Herria" width="400" height="300" loading="lazy">
-                    </div>
-                    <div class="p7-galeria-argazkitxoa">
-                        <img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_0763-high.jpg" alt="Sariak" width="400" height="300" loading="lazy">
-                    </div>
-                </div>
-            </div>
-            <div class="p7-galeria-botoia">
-                <a href="/argazkiak" class="p7-botoi-ertzduna">Ikusi Album Osoa →</a>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="p7-bukaerako-panela">
-        <h2>Eskerrik asko Mallabia!</h2>
-        <p>Gure ingurunean 400 korrikolari elkarrekin ikustea bikaina izan da. Hirugarren edizioa historia da jada. Jarraitu gaitazu sareetan izen-emateen irekiera ez galtzeko.</p>
-        <div class="p7-hurrengo-ikurna">IV. EDIZIOA · 2027</div>
-    </div>
-
-    </main>
-
-</div>
-
-<button id="p7-gora-botoia" aria-label="Gora joan">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-        <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
-</button>
-
-<style>
+/* =============================================
+CORRECCIÓN 4: Scroll-to-top — definición única
+(eliminada la duplicación que estaba en bloque separado)
+============================================= */
 #p7-gora-botoia {
-    position: fixed;
-    bottom: calc(30px + env(safe-area-inset-bottom));
-    right: calc(30px + env(safe-area-inset-right));
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
-    background: rgba(15, 23, 42, 0.6);
-    color: var(--neon-ziana, #00f2fe);
-    border: 1px solid rgba(0, 242, 254, 0.25);
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(15px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    z-index: 9999;
-    touch-action: manipulation;
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease;
+position: fixed;
+bottom: calc(30px + env(safe-area-inset-bottom));
+right: calc(30px + env(safe-area-inset-right));
+width: 50px;
+height: 50px;
+border-radius: 14px;
+background: #0d1c3a;
+color: var(--neon-ziana, #00d2f0);
+border: 1.5px solid rgba(180, 220, 255, 0.25);
+cursor: pointer;
+opacity: 0;
+visibility: hidden;
+transform: translateY(15px);
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+z-index: 9999;
+touch-action: manipulation;
+transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+box-shadow 0.3s ease, transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease;
 }
 #p7-gora-botoia:hover {
-    background: var(--neon-ziana, #00f2fe);
-    color: #020617;
-    border-color: var(--neon-ziana, #00f2fe);
-    box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
-    transform: translateY(-2px);
-}
-#p7-gora-botoia:focus-visible {
-    outline: 2px solid var(--neon-ziana, #00f2fe);
-    outline-offset: 3px;
+background: #1a4fd6;
+color: #fff;
+border-color: #1a4fd6;
+box-shadow: 0 0 20px rgba(26, 79, 214, 0.5);
+transform: translateY(-2px);
 }
 #p7-gora-botoia:active { transform: translateY(1px); }
 #p7-gora-botoia.ikusgai {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
 }
 #p7-gora-botoia svg { transition: transform 0.3s ease; }
 #p7-gora-botoia:hover svg { transform: translateY(-2px); }
 
 @media (prefers-reduced-motion: reduce) {
-    #p7-gora-botoia,
-    #p7-gora-botoia svg {
-        transition: none;
-    }
-    #p7-gora-botoia:hover,
-    #p7-gora-botoia:hover svg {
-        transform: none;
-    }
+#p7-gora-botoia,
+#p7-gora-botoia svg {
+transition: none;
+}
+#p7-gora-botoia:hover,
+#p7-gora-botoia:hover svg {
+transform: none;
+}
+}
+
+/* =============================================
+BABESLEAK — banda oscura (antes era fondo blanco,
+inconsistente con la migración full-dark del 2026-07-09)
+============================================= */
+.p7-babesleak-atala {
+background: linear-gradient(180deg, #0a0f1c 0%, #020617 100%);
+border: 1px solid rgba(0, 242, 254, 0.12);
+border-radius: 24px;
+padding: 40px 24px;
+}
+.p7-babesle-etiketa {
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(--neon-ziana);
+}
+.p7-babesle-izenburua {
+font-family: 'Syne', sans-serif;
+font-weight: 800;
+font-size: clamp(24px, 5vw, 34px);
+letter-spacing: -0.02em;
+color: var(--testu-argia);
+margin: 10px 0 0;
+}
+/* Rejilla compacta: 2 col móvil → 3 tablet → 5 escritorio.
+   Antes: auto-fit minmax(150px) + aspect-ratio 2/1 = 1 sola columna
+   en móvil con celdas de ~165px de alto → muro vertical de 9 tarjetas. */
+.p7-babesle-sarea {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 12px;
+max-width: 1000px;
+margin: 0 auto 22px;
+}
+@media (min-width: 560px) {
+.p7-babesle-sarea { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+}
+@media (min-width: 900px) {
+.p7-babesle-sarea { grid-template-columns: repeat(5, 1fr); gap: 16px; }
+}
+
+/* Altura fija y baja en vez de aspect-ratio: ningún logo estira la fila */
+.p7-babesle-txartela {
+background: #ffffff;
+border: 1px solid rgba(0, 242, 254, 0.15);
+border-radius: 14px;
+padding: 12px 14px;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 88px;
+position: relative;
+overflow: hidden;
+transition: transform 0.35s cubic-bezier(.2,.7,.2,1),
+            border-color 0.35s ease,
+            box-shadow 0.35s ease;
+}
+@media (min-width: 900px) {
+.p7-babesle-txartela { height: 100px; }
+}
+
+/* Línea cian→morado al hover, igual que las tarjetas de galería */
+.p7-babesle-txartela::after {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 2px;
+background: linear-gradient(90deg, var(--neon-ziana) 0%, var(--neon-morea) 100%);
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 0.45s cubic-bezier(.2,.7,.2,1);
+}
+.p7-babesle-txartela:hover {
+transform: translateY(-4px);
+border-color: var(--neon-ziana);
+box-shadow: 0 12px 30px rgba(0, 242, 254, 0.18);
+}
+.p7-babesle-txartela:hover::after { transform: scaleX(1); }
+
+.p7-babesle-txartela img {
+max-width: 100%;
+max-height: 100%;
+width: auto;
+height: auto;
+object-fit: contain;
+display: block;
+}
+
+/* Colaboradores solo-texto: una línea, no un párrafo gigante.
+   Antes: 1.45rem (~23px) con line-height 2 → varias líneas. */
+.p7-laguntzaile-testua {
+text-align: center;
+font-size: 13px;
+color: var(--testu-itzalia);
+line-height: 1.8;
+letter-spacing: 0.02em;
+margin: 0 auto;
+max-width: 1000px;
+padding: 16px 20px;
+background: var(--bg-txartela);
+border: 1px solid rgba(255, 255, 255, 0.06);
+border-radius: 12px;
+}
+.p7-laguntzaile-testua strong {
+color: var(--neon-ziana);
+font-weight: 600;
+display: inline-block;
+margin-top: 8px;
+letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+.p7-babesle-txartela,
+.p7-babesle-txartela::after { transition: none; }
+.p7-babesle-txartela:hover { transform: none; }
+.p7-babesle-txartela:hover::after { transform: scaleX(0); }
+}
+
+/* =============================================
+KOKAPENA + SARE SOZIALAK
+============================================= */
+.p7-mapa-atala { margin-top: 25px; }
+.p7-mapa-goiburua { text-align: center; max-width: 640px; margin: 0 auto; }
+.p7-mapa-marko {
+max-width: 900px;
+margin: 20px auto 0;
+border-radius: 16px;
+overflow: hidden;
+border: 1px solid rgba(0, 242, 254, 0.2);
+box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+background: #fff;
+}
+.p7-mapa-marko iframe {
+width: 100%;
+height: 340px;
+display: block;
+border: 0;
+}
+.p7-mapa-loturak { text-align: center; margin-top: 16px; }
+.p7-sare-sozialak {
+display: flex;
+justify-content: center;
+gap: 14px;
+margin-top: 28px;
+}
+.p7-sare-ikonoa {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 46px;
+height: 46px;
+border-radius: 14px;
+background: rgba(15, 23, 42, 0.8);
+border: 1px solid rgba(255,255,255,0.1);
+color: var(--testu-argia);
+transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+touch-action: manipulation;
+}
+.p7-sare-ikonoa:hover {
+background: var(--neon-ziana);
+color: var(--bg-nagusia);
+border-color: var(--neon-ziana);
+box-shadow: 0 0 15px rgba(0,242,254,0.4);
+transform: translateY(-2px);
+}
+.p7-sare-ikonoa svg { width: 22px; height: 22px; }
+@media (prefers-reduced-motion: reduce) {
+.p7-sare-ikonoa { transition: none; }
+.p7-sare-ikonoa:hover { transform: none; }
 }
 </style>
 
+<div id="p7-etorkizuna-basa">
+
+<a href="#p7-eduki-nagusia" class="p7-salto-lotura">Eduki nagusira joan</a>
+
+<header class="p7-hasiera" id="p7-eduki-nagusia">
+<div class="p7-goiko-barra">
+<a href="/es/inicio" class="p7-hizkuntza-botoia">ES</a>
+</div>
+<h1 class="p7-izenburu-distiratsua" translate="no">7PAGO</h1>
+<div class="p7-azpiizenburua">Mendi Lasterketa</div>
+
+<p class="p7-hasierako-azalpena">
+Mallabia · Bizkaia | Oiz mendiaren magalean, ezkutuko ur-jauzi, baso eta bide historikoen artean.
+</p>
+
+<section class="p7-ekintza-gunea" aria-label="Ekintza azkarrak">
+<p class="p7-ekintza-izenburua">III. Edizioa (2026) amaitu da. Bilatu zure datuak!</p>
+<div class="p7-gune-loturak">
+<a href="/emaitzak" class="p7-botoi-panela"><span aria-hidden="true">🏁</span> Sailkapenak</a>
+<a href="/argazkiak" class="p7-botoi-panela"><span aria-hidden="true">📸</span> Argazki Galeria</a>
+<a href="/bideoak" class="p7-botoi-panela"><span aria-hidden="true">🎬</span> Bideoak</a>
+</div>
+</section>
+
+<div
+class="p7-bideo-euskarria"
+role="button"
+tabindex="0"
+aria-label="7pago Mendi Lasterketa bideoa erreproduzitu"
+data-bideo-id="UXGQBb10PW0">
+
+<img
+class="p7-bideo-aurreikuspena"
+src="https://i.ytimg.com/vi/UXGQBb10PW0/maxresdefault.jpg"
+onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/UXGQBb10PW0/hqdefault.jpg';"
+alt="7pago Mendi Lasterketa — bideo miniaturen irudia"
+width="900"
+height="506"
+loading="lazy">
+
+<div class="p7-bideo-erreproduzitu" aria-hidden="true">
+<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="40" cy="40" r="39" stroke="#00f2fe" stroke-width="1.5" fill="rgba(2,6,23,0.7)"/>
+<polygon points="32,24 60,40 32,56" fill="#00f2fe"/>
+</svg>
+</div>
+
+<iframe
+src=""
+data-src="https://www.youtube.com/embed/UXGQBb10PW0?rel=0&autoplay=1"
+title="7pago Mendi Lasterketa bideoa"
+allowfullscreen
+allow="autoplay; encrypted-media">
+</iframe>
+</div>
+</header>
+
+<div style="padding: 0 10px 20px 10px;">
+<div class="p7-daturik-onena">
+<div class="p7-datu-kutxa nabarmendua p7-datu-korrikalariak">
+<div class="p7-datu-zenbakia">400</div>
+<div class="p7-datu-testua">Parte-hartzaile</div>
+</div>
+<div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(0, 242, 254, 0.15);">
+<div class="p7-datu-zenbakia">25K</div>
+<div class="p7-datu-testua">Ibilbide Luzea</div>
+</div>
+<div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(0, 242, 254, 0.15);">
+<div class="p7-datu-zenbakia">+1400m</div>
+<div class="p7-datu-testua">Desnibela</div>
+</div>
+<div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(157, 78, 223, 0.15);">
+<div class="p7-datu-zenbakia">16K</div>
+<div class="p7-datu-testua">Ibilbide Laburra</div>
+</div>
+<div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(157, 78, 223, 0.15);">
+<div class="p7-datu-zenbakia">+750m</div>
+<div class="p7-datu-testua">Desnibela</div>
+</div>
+</div>
+</div>
+
+<div class="p7-sare-orokorra">
+
+<div class="p7-ziber-txartela">
+<div>
+<div class="p7-txartel-goiburua">01 // ANTOLAKUNTZA</div>
+<h2 class="p7-txartel-izenburua"><span translate="no">7 Pago</span> Elkartea</h2>
+<div class="p7-txartel-edukia">
+<p>Mallabiako mendiekiko maitasunetik jaio ginen. Duatloiak antolatzetik mendi lasterketa hau diseinatzera igaro gara, Oiz lekuko dela ur-jauziak, baso zaharrak eta bide tekniko ezezagunak erakusteko.</p>
+</div>
+</div>
+<div class="p7-informazio-lerroa">
+<div class="p7-elkarte-logoa">
+<img
+src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/7pago-logo-original-transparente-high-x078sj.png"
+alt="7 Pago"
+width="100"
+height="100"
+loading="lazy">
+</div>
+<div class="p7-txartel-edukia"><p style="font-size: 12px;">Mallabian mendi kirola eta inguruko parajeak bultzatzeko lanean diharduen taldea.</p></div>
+</div>
+</div>
+
+<div class="p7-ziber-txartela" style="--ertz-argia: rgba(157, 78, 223, 0.35)">
+<div>
+<div class="p7-txartel-goiburua">02 // ZIRKUITU OFIZIALA</div>
+<h2 class="p7-txartel-izenburua" translate="no">Durangaldeko <span>Kopa</span></h2>
+<div class="p7-txartel-edukia">
+<p>Eskualdeko 8 lasterketa biltzen dituen zirkuituko lehen geltokia gara. Zirkuituko lasterketa guztiak puntuagarriak dira. Aurtengo nobedadea bi kopa izango ditugula da: DURANGALDEKO MARI KOPA (lasterketa luzeak) eta DURANGALDEKO SUGAAR KOPA (lasterketa motzak).</p>
+</div>
+</div>
+<div class="p7-informazio-lerroa">
+<a href="https://durangaldekokopa.com/" target="_blank" rel="noopener noreferrer">
+<img
+class="p7-kopa-irudia"
+src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo_horizontal-high-73hlhn.png?enable-io=true&width=1252"
+alt="Durangaldeko Kopa"
+width="140"
+height="60"
+loading="lazy">
+</a>
+<a class="p7-kopa-lotura" href="https://durangaldekokopa.com/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--neon-ziana); text-decoration: none; font-weight: bold;">Ikusi Kopako sailkapenak →</a>
+</div>
+</div>
+
+<div class="p7-tarte-bikoitza p7-galeria-atala">
+<div style="text-align: center;">
+<div class="p7-txartel-goiburua">2026KO EDIZIOA</div>
+<h2 class="p7-txartel-izenburua" style="margin-bottom: 0;">Une <span>Garrantzitsuenak</span></h2>
+</div>
+<div class="p7-galeria-egitura">
+<div class="p7-galeria-nagusia">
+<img
+src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/7z1a2837-high.jpg"
+alt="Arietzu"
+width="800"
+height="600"
+loading="lazy">
+</div>
+<div class="p7-galeria-azpisarea">
+<div class="p7-galeria-argazkitxoa">
+<img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/img_6642-heic-high.jpg" alt="Zengotitagaine" width="400" height="300" loading="lazy">
+</div>
+<div class="p7-galeria-argazkitxoa">
+<img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_9047-high.jpg" alt="Lasterketa" width="400" height="300" loading="lazy">
+</div>
+<div class="p7-galeria-argazkitxoa">
+<img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_9862-high.jpg" alt="Herria" width="400" height="300" loading="lazy">
+</div>
+<div class="p7-galeria-argazkitxoa">
+<img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_0763-high.jpg" alt="Sariak" width="400" height="300" loading="lazy">
+</div>
+</div>
+</div>
+<div class="p7-galeria-botoia">
+<a href="/argazkiak" class="p7-botoi-ertzduna">Ikusi Album Osoa →</a>
+</div>
+</div>
+
+</div>
+
+<div class="p7-bukaerako-panela">
+<h2>Eskerrik asko Mallabia!</h2>
+<p>Gure ingurunean 400 korrikalari elkarrekin ikustea bikaina izan da. Hirugarren edizioa historia da jada. Jarraitu gaitzazu sareetan izen-emateen irekiera ez galtzeko.</p>
+
+<div class="p7-2027-txartela">
+<span class="p7-2027-tag">IV. edizioa · 2027</span>
+<p class="p7-2027-desc">Utzi zure emaila eta izen-ematea irekitzean abisatuko dizugu. Ez dizugu besterik bidaliko.</p>
+<form class="p7-2027-form" id="p7-2027-form" novalidate>
+<input type="email" class="p7-2027-input" id="p7-2027-email" name="email" placeholder="zure@emaila.eus" autocomplete="email" required aria-label="Zure emaila">
+<input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
+<button type="submit" class="p7-2027-btn" id="p7-2027-submit">Abisatu</button>
+</form>
+<span class="p7-2027-msg" id="p7-2027-msg" role="status" aria-live="polite"></span>
+</div>
+</div>
+
+<!-- PATROCINADORES — banda oscura, consistente con la migración dark del resto del sitio -->
+<section class="p7-full-width p7-babesleak-atala">
+<div style="text-align:center;margin-bottom:30px;max-width:640px;margin-left:auto;margin-right:auto;">
+<span class="p7-babesle-etiketa">Babesleak · Patrocinadores</span>
+<h2 class="p7-babesle-izenburua">Eskerrik asko bihotzez</h2>
+<p style="font-size:14px;color:var(--testu-itzalia);line-height:1.6;margin:12px 0 0;">Hauei guztiei esker egiten da posible 7 Pago Mendi Lasterketa.</p>
+</div>
+
+<div class="p7-babesle-sarea">
+<div class="p7-babesle-txartela"><img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo-orbea-high-puqhya.jpg" alt="Orbea" loading="lazy" width="800" height="400"></div>
+<div class="p7-babesle-txartela"><img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/icono-logo-high.png" alt="Talleres Agga" loading="lazy" width="443" height="262"></div>
+<div class="p7-babesle-txartela"><img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo-cafes-baque-high.jpg" alt="Cafés Baqué" loading="lazy" width="800" height="400"></div>
+<div class="p7-babesle-txartela"><img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo-eusko-label-high.jpg" alt="Eusko Label" loading="lazy" width="800" height="400"></div>
+<div class="p7-babesle-txartela"><img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo-excavaciones-jon-high.jpg" alt="Excavaciones Jon" loading="lazy" width="800" height="400"></div>
+<div class="p7-babesle-txartela"><img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo-hierros-servando-high.jpg" alt="Hierros Servando" loading="lazy" width="800" height="400"></div>
+<div class="p7-babesle-txartela"><img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo-egui-high.jpg" alt="Egui" loading="lazy" width="800" height="400"></div>
+<div class="p7-babesle-txartela"><img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo-apon-berri-high.jpg" alt="Apon Berri" loading="lazy" width="800" height="400"></div>
+<div class="p7-babesle-txartela"><img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo-alkideba-high.jpg" alt="Alkideba" loading="lazy" width="800" height="400"></div>
+  <div class="p7-babesle-txartela"><img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/2025-05-06-mallabiko-udala-friso-kultur-hamabostaldia-high.jpg"  alt="Mallabia" loading="lazy"  width="300"   height="232"></div>
+</div>
+
+<p class="p7-laguntzaile-testua">Trabaku Behekoa Jatetxea · Trabaku Goiko Jatetxea · Herriko Taberna · Rotek Rótulos<br><strong>Zuen laguntzarekin hazten jarraitzen dugu!</strong></p>
+</section>
+
+<section class="p7-full-width p7-mapa-atala">
+<div class="p7-mapa-goiburua">
+<span class="p7-babesle-etiketa">Non gaude</span>
+<h2 class="p7-babesle-izenburua">Mallabia, Bizkaia</h2>
+</div>
+<div class="p7-mapa-marko">
+<iframe
+src="https://www.google.com/maps?q=Mallabia,Bizkaia&z=13&output=embed"
+loading="lazy"
+title="Mallabiako mapa">
+</iframe>
+</div>
+<div class="p7-mapa-loturak">
+<a href="https://www.google.com/maps/search/?api=1&query=Mallabia%2C+Bizkaia" target="_blank" rel="noopener noreferrer" class="p7-botoi-ertzduna">Mapa handiagoan ikusi →</a>
+</div>
+<div class="p7-sare-sozialak">
+<a href="https://www.instagram.com/7pago_mendi_lasterketa?igsh=djgxODI2N3BwNG9z" target="_blank" rel="noopener noreferrer" class="p7-sare-ikonoa" aria-label="Instagram">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+<line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+</svg>
+</a>
+<a href="https://m.facebook.com/profile.php?id=61556765194498" target="_blank" rel="noopener noreferrer" class="p7-sare-ikonoa" aria-label="Facebook">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+</svg>
+</a>
+</div>
+</section>
+</div>
+
+<button id="p7-gora-botoia" aria-label="Gora joan">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00d2f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+<polyline points="18 15 12 9 6 15"></polyline>
+</svg>
+</button>
+
 <script>
 (function () {
-    var botoia = document.getElementById('p7-gora-botoia');
+/* Scroll-to-top */
+var botoia = document.getElementById('p7-gora-botoia');
 
-    window.addEventListener('scroll', function () {
-        if (window.scrollY > 400) {
-            botoia.classList.add('ikusgai');
-        } else {
-            botoia.classList.remove('ikusgai');
-        }
-    });
+window.addEventListener('scroll', function () {
+if (window.scrollY > 400) {
+botoia.classList.add('ikusgai');
+} else {
+botoia.classList.remove('ikusgai');
+}
+});
 
-    botoia.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+botoia.addEventListener('click', function () {
+window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* YouTube facade — carga el iframe solo al hacer clic o pulsar Enter/Space */
+var bideoak = document.querySelectorAll('.p7-bideo-euskarria[data-bideo-id]');
+
+bideoak.forEach(function (wrapper) {
+function aktivatu() {
+if (wrapper.classList.contains('aktibo')) return;
+var iframe = wrapper.querySelector('iframe');
+var src = iframe.getAttribute('data-src');
+if (src) {
+iframe.setAttribute('src', src);
+iframe.removeAttribute('data-src');
+}
+wrapper.classList.add('aktibo');
+}
+
+wrapper.addEventListener('click', aktivatu);
+wrapper.addEventListener('keydown', function (e) {
+if (e.key === 'Enter' || e.key === ' ') {
+e.preventDefault();
+aktivatu();
+}
+});
+});
+
+/* Tarjeta 2027 — envío a Web3Forms sin recarga */
+var form2027 = document.getElementById('p7-2027-form');
+var email2027 = document.getElementById('p7-2027-email');
+var btn2027 = document.getElementById('p7-2027-submit');
+var msg2027 = document.getElementById('p7-2027-msg');
+
+if (form2027) {
+form2027.addEventListener('submit', function (e) {
+e.preventDefault();
+var balioa = email2027.value.trim();
+if (!balioa || balioa.indexOf('@') === -1 || balioa.indexOf('.') === -1) {
+msg2027.textContent = 'Idatzi baliozko email bat.';
+msg2027.className = 'p7-2027-msg err';
+return;
+}
+btn2027.disabled = true;
+msg2027.textContent = 'Bidaltzen...';
+msg2027.className = 'p7-2027-msg';
+
+fetch('https://api.web3forms.com/submit', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'Accept': 'application/json'
+},
+body: JSON.stringify({
+access_key: '899f7bff-38cc-466b-9bb9-a52c5d6da935',
+subject: '2027 IV. edizioa - interesatua (Hasiera EU)',
+from_name: '7pago.eu',
+email: balioa,
+botcheck: ''
+})
+})
+.then(function (res) { return res.json(); })
+.then(function (data) {
+if (data && data.success) {
+msg2027.textContent = 'Jasota! Abisatuko dizugu.';
+msg2027.className = 'p7-2027-msg ok';
+email2027.value = '';
+} else {
+msg2027.textContent = 'Errorea. Saiatu berriro.';
+msg2027.className = 'p7-2027-msg err';
+}
+btn2027.disabled = false;
+})
+.catch(function () {
+msg2027.textContent = 'Errorea. Saiatu berriro.';
+msg2027.className = 'p7-2027-msg err';
+btn2027.disabled = false;
+});
+});
+}
 }());
 </script>
