@@ -1,5 +1,15 @@
 # 7pago — Guía para Claude
 
+## Relación con el repo `crear` (7pago.com)
+
+Existe un segundo sitio del mismo proyecto: **7pago.com**, una reescritura
+en Next.js (repo `crear`, desplegada en Cloudflare Workers). **Ese repo es
+ahora la fuente de verdad** — cuando el usuario pida un cambio de contenido
+o diseño sin especificar el sitio, se aplica primero allí. Este repo
+(`7pago-assets`, snippets para el CMS Jouwweb que aloja 7pago.eu) queda en
+segundo plano: solo se toca si el usuario lo pide explícitamente, o para
+portar aquí una corrección ya validada en `crear`.
+
 ## Qué es este repositorio
 
 Este repositorio no es una aplicación con build propio: es un almacén de
