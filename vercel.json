@@ -1,9 +1,16 @@
 {
   "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "https://7pago.com",
-      "permanent": true
-    }
+    { "source": "/lasterketa/carrera", "destination": "https://7pago.com/carrera", "permanent": true },
+    { "source": "/lasterketa/inicio", "destination": "https://7pago.com/", "permanent": true },
+    { "source": "/lasterketa", "destination": "https://7pago.com/lasterketa", "permanent": true },
+    { "source": "/inicio", "destination": "https://7pago.com/es/inicio", "permanent": true },
+    { "source": "/informazio-orokorra", "destination": "https://7pago.com/informazio-orokorra", "permanent": true },
+    { "source": "/sailkapenak/resultados", "destination": "https://7pago.com/resultados", "permanent": true },
+    { "source": "/sailkapenak", "destination": "https://7pago.com/emaitzak", "permanent": true },
+    { "source": "/bolondresak", "destination": "https://7pago.com/bolondresak", "permanent": true },
+    { "source": "/galeria/argazkiak", "destination": "https://7pago.com/argazkiak", "permanent": true },
+    { "source": "/galeria/videos", "destination": "https://7pago.com/videos", "permanent": true },
+    { "source": "/galeria/bideoak", "destination": "https://7pago.com/bideoak", "permanent": true },
+    { "source": "/(.*)", "destination": "https://7pago.com", "permanent": true }
   ]
 }
