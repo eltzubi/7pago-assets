@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://7pago.com",
+      "permanent": true
+    }
+  ]
+}
