@@ -1,7 +1,7 @@
 {
   "redirects": [
     { "source": "/lasterketa/carrera", "destination": "https://7pago.com/carrera", "permanent": true },
-    { "source": "/lasterketa/inicio", "destination": "https://7pago.com/", "permanent": true },
+    { "source": "/lasterketa/inicio", "destination": "https://7pago.com/es/inicio", "permanent": true },
     { "source": "/lasterketa", "destination": "https://7pago.com/lasterketa", "permanent": true },
     { "source": "/inicio", "destination": "https://7pago.com/es/inicio", "permanent": true },
     { "source": "/informazio-orokorra", "destination": "https://7pago.com/informazio-orokorra", "permanent": true },
