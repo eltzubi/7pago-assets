@@ -70,29 +70,17 @@ margin-bottom: 12px;
 outline: none;
 }
 
-/* Focus visible global */
-.p7-hizkuntza-botoia:focus-visible,
-.p7-botoi-panela:focus-visible,
-.p7-botoi-ertzduna:focus-visible,
-.p7-kopa-lotura:focus-visible,
-.p7-2027-input:focus-visible,
-.p7-2027-btn:focus-visible,
-#p7-gora-botoia:focus-visible {
-outline: 2px solid var(--neon-ziana);
-outline-offset: 3px;
-}
-
-/* Transiciones solo en elementos interactivos */
+/* Transiciones — definición única para todos los elementos interactivos */
 .p7-hizkuntza-botoia,
 .p7-botoi-panela,
 .p7-botoi-ertzduna,
 .p7-galeria-nagusia img,
 .p7-galeria-argazkitxoa img,
 #p7-gora-botoia {
-transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease;
+transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+box-shadow 0.3s ease, transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease;
 }
 
-/* Respetar prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
 .p7-hizkuntza-botoia,
 .p7-botoi-panela,
@@ -120,7 +108,7 @@ transform: scale(1) !important;
 
 /* =============================================
 CORRECCIÓN 1: Ken Burns en pseudo-elemento ::before
-Evita repaint de background-size, compatible iOS Safari
+transform: scale no provoca repaint — compatible iOS Safari
 ============================================= */
 @keyframes p7KenBurns {
 from { transform: scale(1); }
@@ -153,24 +141,21 @@ color: var(--bg-nagusia);
 box-shadow: 0 0 15px var(--neon-ziana);
 }
 
-/* =============================================
-Header con imagen en ::before + Ken Burns vía transform
-============================================= */
+/* Header: imagen en ::before, gradiente en ::after */
 .p7-hasiera {
 text-align: center;
 padding: 60px 10px 40px;
 position: relative;
 border-radius: 24px;
 margin-bottom: 25px;
-overflow: hidden; /* contiene el ::before escalado */
+overflow: hidden;
 isolation: isolate;
 }
 
-/* Capa imagen: transform no provoca layout reflow */
 .p7-hasiera::before {
 content: '';
 position: absolute;
-inset: -5%; /* margen para que scale(1.06) no deje bordes blancos */
+inset: -5%;
 z-index: -2;
 background-image: url('https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/7z1a2837-high.jpg');
 background-size: cover;
@@ -180,7 +165,6 @@ will-change: transform;
 filter: brightness(0.88) saturate(1.15);
 }
 
-/* Capa gradiente: más foto visible, brillo frío desde abajo */
 .p7-hasiera::after {
 content: '';
 position: absolute;
@@ -197,7 +181,6 @@ font-size: clamp(45px, 9vw, 110px) !important;
 font-weight: 800;
 line-height: 0.9;
 letter-spacing: -2px;
-text-wrap: balance;
 background: linear-gradient(180deg, #ffffff 30%, var(--testu-itzalia) 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
@@ -214,75 +197,6 @@ overflow-wrap: break-word;
 margin-bottom: 25px;
 }
 
-/* =============================================
-CORRECCIÓN 2: YouTube facade
-Carga el iframe solo al hacer clic — evita ~500KB en el render inicial
-============================================= */
-.p7-bideo-euskarria {
-max-width: 900px;
-width: 100%;
-margin: 30px auto;
-border-radius: 18px;
-overflow: hidden;
-box-shadow: 0 10px 40px rgba(0, 242, 254, 0.15);
-border: 1px solid rgba(0, 242, 254, 0.2);
-aspect-ratio: 16/9;
-position: relative;
-background: #000;
-cursor: pointer;
-}
-
-.p7-bideo-aurreikuspena {
-position: absolute;
-inset: 0;
-width: 100%;
-height: 100%;
-object-fit: cover;
-display: block;
-}
-
-.p7-bideo-erreproduzitu {
-position: absolute;
-inset: 0;
-display: flex;
-align-items: center;
-justify-content: center;
-background: rgba(0,0,0,0.3);
-transition: background 0.3s ease;
-}
-.p7-bideo-erreproduzitu:hover {
-background: rgba(0,0,0,0.1);
-}
-
-.p7-bideo-erreproduzitu svg {
-width: 72px;
-height: 72px;
-filter: drop-shadow(0 0 12px rgba(0,242,254,0.5));
-transition: transform 0.3s ease;
-}
-.p7-bideo-erreproduzitu:hover svg {
-transform: scale(1.1);
-}
-
-/* iframe oculto hasta clic */
-.p7-bideo-euskarria iframe {
-position: absolute;
-inset: 0;
-width: 100%;
-height: 100%;
-border: none;
-opacity: 0;
-pointer-events: none;
-}
-.p7-bideo-euskarria.aktibo iframe {
-opacity: 1;
-pointer-events: auto;
-}
-.p7-bideo-euskarria.aktibo .p7-bideo-erreproduzitu,
-.p7-bideo-euskarria.aktibo .p7-bideo-aurreikuspena {
-display: none;
-}
-
 .p7-hasierako-azalpena {
 max-width: 650px;
 margin: 20px auto;
@@ -291,6 +205,10 @@ color: var(--testu-itzalia);
 line-height: 1.6;
 }
 
+/* =============================================
+CORRECCIÓN 2: Jerarquía headings
+h2 dentro del <header> → p con clase visual equivalente
+============================================= */
 .p7-ekintza-gunea {
 max-width: 900px;
 margin: 0 auto 40px auto;
@@ -301,16 +219,9 @@ border-radius: 16px;
 text-align: center;
 box-shadow: 0 -4px 20px rgba(0, 242, 254, 0.18), 0 10px 30px rgba(0,0,0,0.5);
 }
-
-/* =============================================
-CORRECCIÓN 3: Jerarquía de headings
-El h2 dentro del header genera confusión semántica.
-Convertido a p con rol visual equivalente.
-============================================= */
 .p7-ekintza-izenburua {
 font-family: 'Syne', sans-serif;
 font-size: 20px;
-text-wrap: balance;
 margin-bottom: 15px;
 color: #fff;
 text-transform: uppercase;
@@ -355,6 +266,68 @@ border-color: var(--neon-morea);
 box-shadow: 0 0 15px rgba(157, 78, 223, 0.5);
 }
 
+/* =============================================
+CORRECCIÓN 3: YouTube facade
+============================================= */
+.p7-bideo-euskarria {
+max-width: 900px;
+width: 100%;
+margin: 30px auto;
+border-radius: 18px;
+overflow: hidden;
+box-shadow: 0 10px 40px rgba(0, 242, 254, 0.15);
+border: 1px solid rgba(0, 242, 254, 0.2);
+aspect-ratio: 16/9;
+position: relative;
+background: #000;
+cursor: pointer;
+}
+
+.p7-bideo-aurreikuspena {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+}
+
+.p7-bideo-erreproduzitu {
+position: absolute;
+inset: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+background: rgba(0,0,0,0.3);
+transition: background 0.3s ease;
+}
+.p7-bideo-erreproduzitu:hover { background: rgba(0,0,0,0.1); }
+.p7-bideo-erreproduzitu svg {
+width: 72px;
+height: 72px;
+filter: drop-shadow(0 0 12px rgba(0,242,254,0.5));
+transition: transform 0.3s ease;
+}
+.p7-bideo-erreproduzitu:hover svg { transform: scale(1.1); }
+
+.p7-bideo-euskarria iframe {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+border: none;
+opacity: 0;
+pointer-events: none;
+}
+.p7-bideo-euskarria.aktibo iframe {
+opacity: 1;
+pointer-events: auto;
+}
+.p7-bideo-euskarria.aktibo .p7-bideo-erreproduzitu,
+.p7-bideo-euskarria.aktibo .p7-bideo-aurreikuspena {
+display: none;
+}
+
 .p7-sare-orokorra {
 max-width: 1200px;
 margin: 0 auto;
@@ -390,7 +363,6 @@ font-weight: 700;
 .p7-txartel-izenburua {
 font-family: 'Syne', sans-serif;
 font-size: 28px !important;
-text-wrap: balance;
 margin: 0 0 15px 0;
 color: #fff;
 }
@@ -504,7 +476,7 @@ min-width: 0;
 }
 .p7-datu-korrikalariak { grid-column: span 2; }
 .p7-datu-kutxa.nabarmendua {
-background: linear-gradient(135deg, rgba(157, 78, 223, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+background: linear-gradient(135deg, rgba(0, 242, 254, 0.1) 0%, rgba(0, 242, 254, 0.05) 100%);
 border-color: var(--ertz-argia);
 }
 
@@ -517,7 +489,6 @@ border-color: var(--ertz-argia);
 font-family: 'Syne', sans-serif;
 font-size: 24px !important;
 font-weight: 800;
-font-variant-numeric: tabular-nums;
 color: #fff;
 margin-bottom: 4px;
 overflow-wrap: break-word;
@@ -544,9 +515,7 @@ overflow: hidden;
 min-height: 360px;
 border: 1px solid rgba(255,255,255,0.05);
 }
-@media (min-width: 750px) {
-.p7-galeria-nagusia { min-height: 460px; }
-}
+@media (min-width: 750px) { .p7-galeria-nagusia { min-height: 460px; } }
 .p7-galeria-azpisarea { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; }
 .p7-galeria-argazkitxoa { border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; border: 1px solid rgba(255,255,255,0.05); }
 .p7-galeria-nagusia img, .p7-galeria-argazkitxoa img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -565,22 +534,21 @@ font-weight: 700;
 letter-spacing: 2px;
 text-transform: uppercase;
 }
-.p7-botoi-ertzduna:hover { border-color: var(--neon-morea); background: var(--neon-morea); box-shadow: 0 0 15px var(--neon-morea); }
+.p7-botoi-ertzduna:hover { border-color: #ffffff; background: rgba(255,255,255,0.1); box-shadow: 0 0 15px rgba(255,255,255,0.2); }
 
 .p7-bukaerako-panela {
-background: #000000;
+background: linear-gradient(135deg, #000000 0%, #070d1f 100%);
 border: 1px solid rgba(255, 255, 255, 0.05);
 border-radius: 16px;
 padding: 45px 20px;
 text-align: center;
 margin-top: 25px;
 }
-.p7-bukaerako-panela h2 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 48px) !important; text-wrap: balance; margin-bottom: 15px; color: #fff; }
+.p7-bukaerako-panela h2 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 48px) !important; margin-bottom: 15px; color: #fff; }
 .p7-bukaerako-panela p { color: var(--testu-itzalia); max-width: 550px; margin: 0 auto 30px auto; font-size: 16px; }
 
 /* =============================================
 Tarjeta 2027 — captura de email (Web3Forms)
-Mismo sello morado que la galería
 ============================================= */
 .p7-2027-txartela {
 max-width: 560px;
@@ -601,7 +569,7 @@ top: 0;
 left: 0;
 right: 0;
 height: 2px;
-background: linear-gradient(90deg, var(--neon-morea) 0%, var(--neon-ziana) 100%);
+background: linear-gradient(90deg, #9d4edf 0%, #00f2fe 100%);
 }
 .p7-2027-txartela > * {
 position: relative;
@@ -652,9 +620,9 @@ border-color: var(--neon-ziana);
 box-shadow: 0 0 14px rgba(0, 242, 254, 0.25);
 }
 .p7-2027-btn {
-background: var(--neon-morea);
+background: #9d4edf;
 color: #fff;
-border: 1px solid var(--neon-morea);
+border: 1px solid #9d4edf;
 border-radius: 8px;
 padding: 13px 24px;
 font-family: 'Space Grotesk', sans-serif;
@@ -676,6 +644,11 @@ opacity: 0.55;
 cursor: wait;
 transform: none;
 box-shadow: none;
+}
+.p7-2027-input:focus-visible,
+.p7-2027-btn:focus-visible {
+outline: 2px solid var(--neon-ziana);
+outline-offset: 3px;
 }
 .p7-2027-msg {
 font-size: 12px !important;
@@ -707,8 +680,8 @@ transform: none;
 }
 
 /* =============================================
-CORRECCIÓN 4: Scroll-to-top — definición única
-(eliminada la duplicación que estaba en bloque separado)
+CORRECCIÓN 4: Scroll-to-top — definición única (sin bloque <style> separado)
+• transition añadida (faltaba por completo en la versión ES)
 ============================================= */
 #p7-gora-botoia {
 position: fixed;
@@ -717,9 +690,9 @@ right: 30px;
 width: 50px;
 height: 50px;
 border-radius: 14px;
-background: #0d1c3a;
-color: var(--neon-ziana, #00d2f0);
-border: 1.5px solid rgba(180, 220, 255, 0.25);
+background: rgba(15, 23, 42, 0.6);
+color: var(--neon-ziana, #00f2fe);
+border: 1px solid rgba(0, 242, 254, 0.25);
 cursor: pointer;
 opacity: 0;
 visibility: hidden;
@@ -733,10 +706,10 @@ transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease,
 box-shadow 0.3s ease, transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease;
 }
 #p7-gora-botoia:hover {
-background: #1a4fd6;
-color: #fff;
-border-color: #1a4fd6;
-box-shadow: 0 0 20px rgba(26, 79, 214, 0.5);
+background: var(--neon-ziana, #00f2fe);
+color: #020617;
+border-color: var(--neon-ziana, #00f2fe);
+box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
 transform: translateY(-2px);
 }
 #p7-gora-botoia:active { transform: translateY(1px); }
@@ -750,24 +723,26 @@ transform: translateY(0);
 
 @media (prefers-reduced-motion: reduce) {
 #p7-gora-botoia,
-#p7-gora-botoia svg {
-transition: none;
-}
+#p7-gora-botoia svg { transition: none; }
 #p7-gora-botoia:hover,
-#p7-gora-botoia:hover svg {
-transform: none;
-}
+#p7-gora-botoia:hover svg { transform: none; }
 }
 
 /* =============================================
-BABESLEAK — banda oscura (antes era fondo blanco,
-inconsistente con la migración full-dark del 2026-07-09)
-============================================= */
+   BABESLEAK / PATROCINADORES — banda oscura + rejilla compacta
+   Antes: section con background:#ffffff y estilos inline con
+   aspect-ratio:2/1 → 1 columna en móvil con celdas de ~165px.
+   ============================================= */
 .p7-babesleak-atala {
 background: linear-gradient(180deg, #0a0f1c 0%, #020617 100%);
 border: 1px solid rgba(0, 242, 254, 0.12);
 border-radius: 24px;
 padding: 40px 24px;
+}
+.p7-babesle-goiburua {
+text-align: center;
+max-width: 640px;
+margin: 0 auto 30px;
 }
 .p7-babesle-etiketa {
 font-size: 11px;
@@ -784,9 +759,14 @@ letter-spacing: -0.02em;
 color: var(--testu-argia);
 margin: 10px 0 0;
 }
-/* Rejilla compacta: 2 col móvil → 3 tablet → 5 escritorio.
-   Antes: auto-fit minmax(150px) + aspect-ratio 2/1 = 1 sola columna
-   en móvil con celdas de ~165px de alto → muro vertical de 9 tarjetas. */
+.p7-babesle-azalpena {
+font-size: 14px;
+color: var(--testu-itzalia);
+line-height: 1.6;
+margin: 12px 0 0;
+}
+
+/* Rejilla: 2 col móvil → 3 tablet → 5 escritorio */
 .p7-babesle-sarea {
 display: grid;
 grid-template-columns: repeat(2,minmax(0,1fr));
@@ -801,7 +781,7 @@ margin: 0 auto 22px;
 .p7-babesle-sarea { grid-template-columns: repeat(5,minmax(0,1fr)); gap: 16px; }
 }
 
-/* Altura fija y baja en vez de aspect-ratio: ningún logo estira la fila */
+/* Altura fija en vez de aspect-ratio: ningún logo estira la fila */
 .p7-babesle-txartela {
 background: #ffffff;
 border: 1px solid rgba(0, 242, 254, 0.15);
@@ -820,8 +800,6 @@ transition: transform 0.35s cubic-bezier(.2,.7,.2,1),
 @media (min-width: 900px) {
 .p7-babesle-txartela { height: 100px; }
 }
-
-/* Línea cian→morado al hover, igual que las tarjetas de galería */
 .p7-babesle-txartela::after {
 content: '';
 position: absolute;
@@ -838,7 +816,6 @@ border-color: var(--neon-ziana);
 box-shadow: 0 12px 30px rgba(0, 242, 254, 0.18);
 }
 .p7-babesle-txartela:hover::after { transform: scaleX(1); }
-
 .p7-babesle-txartela img {
 max-width: 100%;
 max-height: 100%;
@@ -848,8 +825,7 @@ object-fit: contain;
 display: block;
 }
 
-/* Colaboradores solo-texto: una línea, no un párrafo gigante.
-   Antes: 1.45rem (~23px) con line-height 2 → varias líneas. */
+/* Colaboradores solo-texto: una línea, no un párrafo gigante */
 .p7-laguntzaile-testua {
 text-align: center;
 font-size: 13px;
@@ -879,7 +855,7 @@ letter-spacing: 0.04em;
 }
 
 /* =============================================
-KOKAPENA + SARE SOZIALAK
+UBICACIÓN + REDES SOCIALES
 ============================================= */
 .p7-mapa-atala { margin-top: 25px; }
 .p7-mapa-goiburua { text-align: center; max-width: 640px; margin: 0 auto; }
@@ -933,37 +909,40 @@ transform: translateY(-2px);
 
 <div id="p7-etorkizuna-basa">
 
-<a href="#p7-eduki-nagusia" class="p7-salto-lotura">Eduki nagusira joan</a>
+<a href="#p7-eduki-nagusia" class="p7-salto-lotura">Ir al contenido principal</a>
 
 <header class="p7-hasiera" id="p7-eduki-nagusia">
-<h1 class="p7-izenburu-distiratsua" translate="no">7PAGO <div class="p7-azpiizenburua">Mendi Lasterketa</div></h1>
+<h1 class="p7-izenburu-distiratsua" translate="no">7PAGO <div class="p7-azpiizenburua">Carrera de Montaña</div></h1>
 
 <p class="p7-hasierako-azalpena">
-Mallabia · Bizkaia | Oiz mendiaren magalean, ezkutuko ur-jauzi, baso eta bide historikoen artean.
+Mallabia · Bizkaia | A las faldas del monte Oiz, entre cascadas ocultas, bosques antiguos y senderos históricos.
 </p>
 
-<section class="p7-ekintza-gunea" aria-label="Ekintza azkarrak">
-<p class="p7-ekintza-izenburua">Ez galdu IV. Edizioa (2027)</p>
+<!-- CORRECCIÓN 2: h2 → p con clase visual equivalente -->
+<section class="p7-ekintza-gunea" aria-label="Accesos rápidos">
+<p class="p7-ekintza-izenburua">No te pierdas la IV Edición (2027)</p>
 <div class="p7-gune-loturak">
-<a href="#p7-2027" class="p7-botoi-panela nabarmendua" aria-label="Jaso abisua IV. Edizioaz 2027"><span aria-hidden="true">📅</span> Jaso abisua</a>
-<a href="/emaitzak" class="p7-botoi-panela"><span aria-hidden="true">🏁</span> Sailkapenak</a>
-<a href="/argazkiak" class="p7-botoi-panela"><span aria-hidden="true">📸</span> Argazki Galeria</a>
-<a href="/bideoak" class="p7-botoi-panela"><span aria-hidden="true">🎬</span> Bideoak</a>
+<a href="#p7-2027" class="p7-botoi-panela nabarmendua" aria-label="Recibir aviso de la IV Edición 2027"><span aria-hidden="true">📅</span> Recibir aviso</a>
+<a href="/resultados" class="p7-botoi-panela"><span aria-hidden="true">🏁</span> Clasificaciones</a>
+<a href="/fotos" class="p7-botoi-panela"><span aria-hidden="true">📸</span> Galería de Fotos</a>
+<a href="/videos" class="p7-botoi-panela"><span aria-hidden="true">🎬</span> Vídeos</a>
 </div>
 </section>
 
+<!-- CORRECCIÓN 3: YouTube facade -->
 <div
 class="p7-bideo-euskarria"
 role="button"
 tabindex="0"
-aria-label="7pago Mendi Lasterketa bideoa erreproduzitu"
+aria-label="Reproducir vídeo 7pago Mendi Lasterketa"
 data-bideo-id="UXGQBb10PW0">
 
+<!-- Fallback a hqdefault si maxresdefault no existe -->
 <img
 class="p7-bideo-aurreikuspena"
 src="https://i.ytimg.com/vi/UXGQBb10PW0/maxresdefault.jpg"
 onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/UXGQBb10PW0/hqdefault.jpg';"
-alt="7pago Mendi Lasterketa — bideo miniaturen irudia"
+alt="7pago Mendi Lasterketa — miniatura del vídeo"
 width="900"
 height="506"
 loading="lazy">
@@ -978,7 +957,7 @@ loading="lazy">
 <iframe
 src=""
 data-src="https://www.youtube-nocookie.com/embed/UXGQBb10PW0?rel=0&autoplay=1"
-title="7pago Mendi Lasterketa bideoa"
+title="7pago Mendi Lasterketa — vídeo oficial"
 allowfullscreen
 allow="autoplay; encrypted-media">
 </iframe>
@@ -987,12 +966,12 @@ allow="autoplay; encrypted-media">
 
 <div style="padding: 0 10px; margin: 10px auto 30px;">
 <div class="p7-2027-txartela" id="p7-2027">
-<span class="p7-2027-tag">IV. edizioa · 2027</span>
-<p class="p7-2027-desc">Eman zure helbide elektronikoa eta IV. Edizioaren 2027ko data iragartzen dugunean jakinaraziko dizugu.</p>
+<span class="p7-2027-tag">IV edición · 2027</span>
+<p class="p7-2027-desc">Déjanos tu correo y te avisamos en cuanto anunciemos la fecha de la IV Edición 2027.</p>
 <form class="p7-2027-form" id="p7-2027-form" novalidate>
-<input type="email" class="p7-2027-input" id="p7-2027-email" name="email" placeholder="zure@emaila.eus" autocomplete="email" required aria-label="Zure emaila">
+<input type="email" class="p7-2027-input" id="p7-2027-email" name="email" placeholder="tu@email.com" autocomplete="email" required aria-label="Tu email">
 <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
-<button type="submit" class="p7-2027-btn" id="p7-2027-submit">Abisatu</button>
+<button type="submit" class="p7-2027-btn" id="p7-2027-submit">Avisadme</button>
 </form>
 <span class="p7-2027-msg" id="p7-2027-msg" role="status" aria-live="polite"></span>
 </div>
@@ -1002,23 +981,23 @@ allow="autoplay; encrypted-media">
 <div class="p7-daturik-onena">
 <div class="p7-datu-kutxa nabarmendua p7-datu-korrikalariak">
 <div class="p7-datu-zenbakia">400</div>
-<div class="p7-datu-testua">Parte-hartzaile</div>
+<div class="p7-datu-testua">Participantes</div>
 </div>
 <div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(0, 242, 254, 0.15);">
 <div class="p7-datu-zenbakia">25K</div>
-<div class="p7-datu-testua">Ibilbide Luzea</div>
+<div class="p7-datu-testua">Recorrido Largo</div>
 </div>
 <div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(0, 242, 254, 0.15);">
 <div class="p7-datu-zenbakia">+1400m</div>
-<div class="p7-datu-testua">Desnibela</div>
+<div class="p7-datu-testua">Desnivel</div>
 </div>
-<div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(157, 78, 223, 0.15);">
+<div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(0, 242, 254, 0.15);">
 <div class="p7-datu-zenbakia">16K</div>
-<div class="p7-datu-testua">Ibilbide Laburra</div>
+<div class="p7-datu-testua">Recorrido Corto</div>
 </div>
-<div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(157, 78, 223, 0.15);">
+<div class="p7-datu-kutxa" style="border-bottom: 2px solid rgba(0, 242, 254, 0.15);">
 <div class="p7-datu-zenbakia">+750m</div>
-<div class="p7-datu-testua">Desnibela</div>
+<div class="p7-datu-testua">Desnivel</div>
 </div>
 </div>
 </div>
@@ -1027,10 +1006,10 @@ allow="autoplay; encrypted-media">
 
 <div class="p7-ziber-txartela">
 <div>
-<div class="p7-txartel-goiburua">01 // ANTOLAKUNTZA</div>
-<h2 class="p7-txartel-izenburua"><span translate="no">7 Pago</span> Elkartea</h2>
+<div class="p7-txartel-goiburua">01 // ORGANIZACIÓN</div>
+<h2 class="p7-txartel-izenburua">Asociación <span>7 Pago</span></h2>
 <div class="p7-txartel-edukia">
-<p>Mallabiako mendiekiko maitasunetik jaio ginen. Duatloiak antolatzetik mendi lasterketa hau diseinatzera igaro gara, Oiz lekuko dela ur-jauziak, baso zaharrak eta bide tekniko ezezagunak erakusteko.</p>
+<p>Nacimos de la pasión por las montañas de Mallabia. Tras años organizando duatlones, dimos el salto al diseño de esta carrera de montaña para mostrar, bajo la mirada del monte Oiz, cascadas mágicas, bosques centenarios y senderos técnicos inexplorados.</p>
 </div>
 </div>
 <div class="p7-informazio-lerroa">
@@ -1042,16 +1021,16 @@ width="100"
 height="100"
 loading="lazy">
 </div>
-<div class="p7-txartel-edukia"><p style="font-size: 12px;">Mallabian mendi kirola eta inguruko parajeak bultzatzeko lanean diharduen taldea.</p></div>
+<div class="p7-txartel-edukia"><p style="font-size: 12px;">Un equipo dedicado a impulsar el deporte de montaña y poner en valor los paisajes de Mallabia.</p></div>
 </div>
 </div>
 
-<div class="p7-ziber-txartela" style="--ertz-argia: rgba(157, 78, 223, 0.35)">
+<div class="p7-ziber-txartela" style="--ertz-argia: rgba(0, 242, 254, 0.25)">
 <div>
-<div class="p7-txartel-goiburua">02 // ZIRKUITU OFIZIALA</div>
-<h2 class="p7-txartel-izenburua">Durangaldeko <span>Kopa</span></h2>
+<div class="p7-txartel-goiburua">02 // CIRCUITO OFICIAL</div>
+<h2 class="p7-txartel-izenburua"><span>Copa</span> de Durangaldea</h2>
 <div class="p7-txartel-edukia">
-<p>Eskualdeko 8 lasterketa biltzen dituen zirkuituko lehen geltokia gara. Zirkuituko lasterketa guztiak puntuagarriak dira. Aurtengo nobedadea bi kopa izango ditugula da: DURANGALDEKO MARI KOPA (lasterketa luzeak) eta DURANGALDEKO SUGAAR KOPA (lasterketa motzak).</p>
+<p>Somos la primera parada del circuito que reúne las 8 mejores carreras de la comarca. Todas las carreras del circuito son puntuables. La novedad de este año es que tendremos dos copas: la DURANGALDEKO MARI KOPA (carreras largas) y la DURANGALDEKO SUGAAR KOPA (carreras cortas).</p>
 </div>
 </div>
 <div class="p7-informazio-lerroa">
@@ -1059,37 +1038,37 @@ loading="lazy">
 <img
 class="p7-kopa-irudia"
 src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/logo_horizontal-high-73hlhn.png?enable-io=true&width=1252"
-alt="Durangaldeko Kopa"
+alt="Copa de Durangaldea"
 width="140"
 height="60"
 loading="lazy">
 </a>
-<a class="p7-kopa-lotura" href="https://durangaldekokopa.com/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--neon-ziana); text-decoration: none; font-weight: bold;">Ikusi Kopako sailkapenak →</a>
+<a class="p7-kopa-lotura" href="https://durangaldekokopa.com/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--neon-ziana); text-decoration: none; font-weight: bold;">Ver clasificaciones de la Copa →</a>
 </div>
 </div>
 
 <div class="p7-tarte-bikoitza p7-galeria-atala">
 <div style="text-align: center;">
 <div class="p7-txartel-goiburua">DURANGALDEKO KOPA</div>
-<h2 class="p7-txartel-izenburua" style="margin-bottom: 0;">2026ko <span>Egutegia</span></h2>
+<h2 class="p7-txartel-izenburua" style="margin-bottom: 0;">Calendario <span>2026</span></h2>
 </div>
-<button type="button" id="p7-kopa-toggle" class="p7-kopa-toggle-btn" aria-expanded="false" style="display:none;">Aurreko lasterketak ikusi ↓</button>
+<button type="button" id="p7-kopa-toggle" class="p7-kopa-toggle-btn" aria-expanded="false" style="display:none;">Ver carreras anteriores ↓</button>
 <ul class="p7-kopa-egutegia">
-<li class="p7-kopa-data" data-data="2026-05-23"><span class="p7-kopa-izena" translate="no">7 Pago Mendi Lasterketa</span><span class="p7-kopa-eguna">Maiatzak 23</span></li>
-<li class="p7-kopa-data" data-data="2026-06-20"><span class="p7-kopa-izena" translate="no">Amaraune Mendi Lasterketa</span><span class="p7-kopa-eguna">Ekainak 20</span></li>
-<li class="p7-kopa-data" data-data="2026-07-11"><span class="p7-kopa-izena" translate="no">Zaldu Trail Mendi Lasterketa</span><span class="p7-kopa-eguna">Uztailak 11</span></li>
-<li class="p7-kopa-data" data-data="2026-07-18"><span class="p7-kopa-izena" translate="no">Asto Trail Mendi Lasterketa</span><span class="p7-kopa-eguna">Uztailak 18</span></li>
-<li class="p7-kopa-data" data-data="2026-09-19"><span class="p7-kopa-izena" translate="no">Mañaritik Atxetara</span><span class="p7-kopa-eguna">Irailak 19</span></li>
-<li class="p7-kopa-data" data-data="2026-10-04"><span class="p7-kopa-izena" translate="no">Sorginen Lasterketa</span><span class="p7-kopa-eguna">Urriak 4</span></li>
-<li class="p7-kopa-data" data-data="2026-10-17"><span class="p7-kopa-izena" translate="no">Aramotz Mendi Lasterketa</span><span class="p7-kopa-eguna">Urriak 17</span></li>
-<li class="p7-kopa-data" data-data="2026-10-24"><span class="p7-kopa-izena" translate="no">Aldapegora Mendi Trail</span><span class="p7-kopa-eguna">Urriak 24</span></li>
+<li class="p7-kopa-data" data-data="2026-05-23"><span class="p7-kopa-izena" translate="no">7 Pago Mendi Lasterketa</span><span class="p7-kopa-eguna">23 de mayo</span></li>
+<li class="p7-kopa-data" data-data="2026-06-20"><span class="p7-kopa-izena" translate="no">Amaraune Mendi Lasterketa</span><span class="p7-kopa-eguna">20 de junio</span></li>
+<li class="p7-kopa-data" data-data="2026-07-11"><span class="p7-kopa-izena" translate="no">Zaldu Trail Mendi Lasterketa</span><span class="p7-kopa-eguna">11 de julio</span></li>
+<li class="p7-kopa-data" data-data="2026-07-18"><span class="p7-kopa-izena" translate="no">Asto Trail Mendi Lasterketa</span><span class="p7-kopa-eguna">18 de julio</span></li>
+<li class="p7-kopa-data" data-data="2026-09-19"><span class="p7-kopa-izena" translate="no">Mañaritik Atxetara</span><span class="p7-kopa-eguna">19 de septiembre</span></li>
+<li class="p7-kopa-data" data-data="2026-10-04"><span class="p7-kopa-izena" translate="no">Sorginen Lasterketa</span><span class="p7-kopa-eguna">4 de octubre</span></li>
+<li class="p7-kopa-data" data-data="2026-10-17"><span class="p7-kopa-izena" translate="no">Aramotz Mendi Lasterketa</span><span class="p7-kopa-eguna">17 de octubre</span></li>
+<li class="p7-kopa-data" data-data="2026-10-24"><span class="p7-kopa-izena" translate="no">Aldapegora Mendi Trail</span><span class="p7-kopa-eguna">24 de octubre</span></li>
 </ul>
 </div>
 
 <div class="p7-tarte-bikoitza p7-galeria-atala">
 <div style="text-align: center;">
-<div class="p7-txartel-goiburua">2026KO EDIZIOA</div>
-<h2 class="p7-txartel-izenburua" style="margin-bottom: 0;">Hurrengoan, <span>zu ere bai</span></h2>
+<div class="p7-txartel-goiburua">EDICIÓN 2026</div>
+<h2 class="p7-txartel-izenburua" style="margin-bottom: 0;">Así se vivió. <span>Así lo vivirás</span></h2>
 </div>
 <div class="p7-galeria-egitura">
 <div class="p7-galeria-nagusia">
@@ -1105,34 +1084,34 @@ loading="lazy">
 <img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/img_6642-heic-high.jpg" alt="Zengotitagaine" width="400" height="300" loading="lazy">
 </div>
 <div class="p7-galeria-argazkitxoa">
-<img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_9047-high.jpg" alt="Lasterketa" width="400" height="300" loading="lazy">
+<img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_9047-high.jpg" alt="Carrera" width="400" height="300" loading="lazy">
 </div>
 <div class="p7-galeria-argazkitxoa">
-<img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_9862-high.jpg" alt="Herria" width="400" height="300" loading="lazy">
+<img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_9862-high.jpg" alt="Pueblo" width="400" height="300" loading="lazy">
 </div>
 <div class="p7-galeria-argazkitxoa">
-<img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_0763-high.jpg" alt="Sariak" width="400" height="300" loading="lazy">
+<img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/_mg_0763-high.jpg" alt="Premios" width="400" height="300" loading="lazy">
 </div>
 </div>
 </div>
 <div class="p7-galeria-botoia">
-<a href="/argazkiak" class="p7-botoi-ertzduna">Ikusi Album Osoa →</a>
+<a href="/fotos" class="p7-botoi-ertzduna">Ver Álbum Completo →</a>
 </div>
 </div>
 
 </div>
 
 <div class="p7-bukaerako-panela">
-<h2>Eskerrik asko Mallabia!</h2>
-<p>Gure ingurunean 400 korrikalari elkarrekin ikustea bikaina izan da. Hirugarren edizioa historia da jada. Jarraitu gaitzazu sareetan izen-emateen irekiera ez galtzeko.</p>
+<h2>¡Muchas gracias Mallabia!</h2>
+<p>Ha sido espectacular ver a 400 personas corredoras disfrutando juntas de nuestro entorno. La tercera edición ya es historia. Síguenos en redes para no perderte la apertura de inscripciones.</p>
 </div>
 
-<!-- PATROCINADORES — banda oscura, consistente con la migración dark del resto del sitio -->
+<!-- PATROCINADORES — banda oscura + rejilla compacta -->
 <section class="p7-full-width p7-babesleak-atala">
-<div style="text-align:center;margin-bottom:30px;max-width:640px;margin-left:auto;margin-right:auto;">
-<span class="p7-babesle-etiketa">Babesleak · Patrocinadores</span>
-<h2 class="p7-babesle-izenburua">Eskerrik asko bihotzez</h2>
-<p style="font-size:14px;color:var(--testu-itzalia);line-height:1.6;margin:12px 0 0;">Hauei guztiei esker egiten da posible 7 Pago Mendi Lasterketa.</p>
+<div class="p7-babesle-goiburua">
+<span class="p7-babesle-etiketa">Patrocinadores · Babesleak</span>
+<h2 class="p7-babesle-izenburua">Gracias de corazón</h2>
+<p class="p7-babesle-azalpena">Gracias a todos ellos es posible la 7 Pago Mendi Lasterketa.</p>
 </div>
 
 <div class="p7-babesle-sarea">
@@ -1148,23 +1127,23 @@ loading="lazy">
   <div class="p7-babesle-txartela"><img src="https://primary.jwwb.nl/public/r/i/b/temp-slzrxlapmqpenunyigux/2025-05-06-mallabiko-udala-friso-kultur-hamabostaldia-high.jpg"  alt="Mallabia" loading="lazy"  width="300"   height="232"></div>
 </div>
 
-<p class="p7-laguntzaile-testua">Trabaku Behekoa Jatetxea · Trabaku Goiko Jatetxea · Herriko Taberna · Rotek Rótulos<br><strong>Zuen laguntzarekin hazten jarraitzen dugu!</strong></p>
+<p class="p7-laguntzaile-testua">Trabaku Behekoa Jatetxea · Trabaku Goiko Jatetxea · Herriko Taberna · Rotek Rótulos<br><strong>¡Seguimos creciendo gracias a vuestro apoyo!</strong></p>
 </section>
 
 <section class="p7-full-width p7-mapa-atala">
 <div class="p7-mapa-goiburua">
-<span class="p7-babesle-etiketa">Non gaude</span>
+<span class="p7-babesle-etiketa">Dónde estamos</span>
 <h2 class="p7-babesle-izenburua">Mallabia, Bizkaia</h2>
 </div>
 <div class="p7-mapa-marko">
 <iframe
 src="https://www.google.com/maps?q=Mallabia,Bizkaia&z=13&output=embed"
 loading="lazy"
-title="Mallabiako mapa">
+title="Mapa de Mallabia">
 </iframe>
 </div>
 <div class="p7-mapa-loturak">
-<a href="https://www.google.com/maps/search/?api=1&query=Mallabia%2C+Bizkaia" target="_blank" rel="noopener noreferrer" class="p7-botoi-ertzduna">Mapa handiagoan ikusi →</a>
+<a href="https://www.google.com/maps/search/?api=1&query=Mallabia%2C+Bizkaia" target="_blank" rel="noopener noreferrer" class="p7-botoi-ertzduna">Ver mapa más grande →</a>
 </div>
 <div class="p7-sare-sozialak">
 <a href="https://www.instagram.com/7pago_mendi_lasterketa?igsh=djgxODI2N3BwNG9z" target="_blank" rel="noopener noreferrer" class="p7-sare-ikonoa" aria-label="Instagram">
@@ -1181,10 +1160,12 @@ title="Mallabiako mapa">
 </a>
 </div>
 </section>
+
 </div>
 
-<button id="p7-gora-botoia" aria-label="Gora joan">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00d2f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+<!-- CORRECCIÓN 4: onclick inline eliminado — lógica en JS -->
+<button id="p7-gora-botoia" aria-label="Volver arriba">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
 <polyline points="18 15 12 9 6 15"></polyline>
 </svg>
 </button>
@@ -1206,7 +1187,7 @@ botoia.addEventListener('click', function () {
 window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-/* YouTube facade — carga el iframe solo al hacer clic o pulsar Enter/Space */
+/* YouTube facade */
 var bideoak = document.querySelectorAll('.p7-bideo-euskarria[data-bideo-id]');
 
 bideoak.forEach(function (wrapper) {
@@ -1230,7 +1211,7 @@ aktivatu();
 });
 });
 
-/* Durangaldeko Kopa — egutegia: tatxatu iraganeko lasterketak, nabarmendu hurrengoa */
+/* Durangaldeko Kopa — calendario: tachar carreras pasadas, destacar la próxima */
 var kopaDatak = document.querySelectorAll('.p7-kopa-data[data-data]');
 var gaur = new Date();
 gaur.setHours(0, 0, 0, 0);
@@ -1251,28 +1232,27 @@ if (hurrengoElementua) {
 hurrengoElementua.classList.add('hurrengoa');
 }
 
-/* Iraganeko lasterketak desplegable baten atzean ezkutatu.
-   dataset.kopaHasieratuta babesa: script hau behin baino gehiagotan
-   exekutatzeak (LegacyBlock-ek scriptak berriz txertatzean) klik
-   entzule bikoiztuak sortzen zituen, eta klik bakoitzak bata bestea
-   bertan behera uzten zuen. */
+/* Ocultar carreras pasadas tras un desplegable.
+   Protección dataset.kopaHasieratuta: si este script se ejecuta más
+   de una vez (LegacyBlock reinserta los <script>), se duplicaba el
+   listener de clic y cada clic se cancelaba con el otro. */
 var kopaToggle = document.getElementById('p7-kopa-toggle');
 if (kopaToggle && kopaToggle.dataset.kopaHasieratuta !== '1' && iraganekoElementuak.length > 0 && iraganekoElementuak.length < kopaDatak.length) {
 kopaToggle.dataset.kopaHasieratuta = '1';
 iraganekoElementuak.forEach(function (el) {
 el.classList.add('p7-kopa-ezkutua');
 });
-var kopaIkusiTestua = 'Aurreko lasterketak ikusi (' + iraganekoElementuak.length + ') ↓';
-var kopaEzkutatuTestua = 'Aurreko lasterketak ezkutatu ↑';
+var kopaIkusiTestua = 'Ver carreras anteriores (' + iraganekoElementuak.length + ') ↓';
+var kopaEzkutatuTestua = 'Ocultar carreras anteriores ↑';
 kopaToggle.style.display = 'inline-flex';
 kopaToggle.textContent = kopaIkusiTestua;
 kopaToggle.addEventListener('click', function () {
-var irekita = kopaToggle.getAttribute('aria-expanded') === 'true';
+var abierto = kopaToggle.getAttribute('aria-expanded') === 'true';
 iraganekoElementuak.forEach(function (el) {
-el.classList.toggle('p7-kopa-ezkutua', irekita);
+el.classList.toggle('p7-kopa-ezkutua', abierto);
 });
-kopaToggle.setAttribute('aria-expanded', String(!irekita));
-kopaToggle.textContent = irekita ? kopaIkusiTestua : kopaEzkutatuTestua;
+kopaToggle.setAttribute('aria-expanded', String(!abierto));
+kopaToggle.textContent = abierto ? kopaIkusiTestua : kopaEzkutatuTestua;
 });
 }
 
@@ -1285,14 +1265,14 @@ var msg2027 = document.getElementById('p7-2027-msg');
 if (form2027) {
 form2027.addEventListener('submit', function (e) {
 e.preventDefault();
-var balioa = email2027.value.trim();
-if (!balioa || balioa.indexOf('@') === -1 || balioa.indexOf('.') === -1) {
-msg2027.textContent = 'Idatzi baliozko email bat.';
+var valor = email2027.value.trim();
+if (!valor || valor.indexOf('@') === -1 || valor.indexOf('.') === -1) {
+msg2027.textContent = 'Escribe un email válido.';
 msg2027.className = 'p7-2027-msg err';
 return;
 }
 btn2027.disabled = true;
-msg2027.textContent = 'Bidaltzen...';
+msg2027.textContent = 'Enviando...';
 msg2027.className = 'p7-2027-msg';
 
 fetch('https://api.web3forms.com/submit', {
@@ -1303,26 +1283,26 @@ headers: {
 },
 body: JSON.stringify({
 access_key: '899f7bff-38cc-466b-9bb9-a52c5d6da935',
-subject: '2027 IV. edizioa - interesatua (Hasiera EU)',
+subject: '2027 IV edición - interesado (Inicio ES)',
 from_name: '7pago.com',
-email: balioa,
+email: valor,
 botcheck: ''
 })
 })
 .then(function (res) { return res.json(); })
 .then(function (data) {
 if (data && data.success) {
-msg2027.textContent = 'Jasota! Abisatuko dizugu.';
+msg2027.textContent = '¡Recibido! Te avisaremos.';
 msg2027.className = 'p7-2027-msg ok';
 email2027.value = '';
 } else {
-msg2027.textContent = 'Errorea. Saiatu berriro.';
+msg2027.textContent = 'Error. Inténtalo de nuevo.';
 msg2027.className = 'p7-2027-msg err';
 }
 btn2027.disabled = false;
 })
 .catch(function () {
-msg2027.textContent = 'Errorea. Saiatu berriro.';
+msg2027.textContent = 'Error. Inténtalo de nuevo.';
 msg2027.className = 'p7-2027-msg err';
 btn2027.disabled = false;
 });
